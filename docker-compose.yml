@@ -1,8 +1,8 @@
+version: '3.4'
+
 services:
   workshop:
     image: workshop
     build:
-      context: ./Workshop.Web
-      dockerfile: Dockerfile
-    ports: 
-      - '801:80'
+      context: .
+      dockerfile: src/Workshop/Dockerfile
