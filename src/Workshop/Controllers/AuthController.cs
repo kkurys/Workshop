@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Workshop.Account.Contracts;
 using Workshop.Account.Dto;
 using Workshop.ViewModels.Account;

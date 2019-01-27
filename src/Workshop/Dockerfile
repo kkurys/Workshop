@@ -10,17 +10,17 @@ RUN curl -SL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-lin
     && tar -xzf "nodejs.tar.gz" -C /usr/local --strip-components=1 \
     && rm nodejs.tar.gz \
     && ln -s /usr/local/bin/node /usr/local/bin/nodejs\
-    && npm i -g @angular/cli \
+    && npm i --unsafe-perm --verbose -g @angular/cli \
     && npm i -g @angular-devkit/build-angular
 
 # Copy csproj and restore as distinct layers
 COPY . ./Workshop/
 RUN cd Workshop \
-    && dotnet restore \
+    && dotnet restore Workshop.sln \
     && npm install
 
 RUN cd Workshop \
-    && dotnet publish -c Release -o out
+    && dotnet publish Workshop.sln -c Release -o out
 
 # build runtime image
 FROM microsoft/dotnet:2.1-aspnetcore-runtime
@@ -37,5 +37,6 @@ RUN curl -SL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-lin
     && ln -s /usr/local/bin/node /usr/local/bin/nodejs\
     && npm i -g @angular/cli
 
-COPY --from=build-env /app/Workshop/out .
+COPY --from=build-env app/Workshop/src/Workshop/out .
 ENTRYPOINT ["dotnet", "Workshop.dll"]
+EXPOSE 80/tcp
