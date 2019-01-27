@@ -1,8 +1,7 @@
 version: '3.4'
 
 services:
-  workshop:
+  workshop.api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "80"
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
