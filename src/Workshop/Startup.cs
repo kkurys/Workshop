@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Workshop.Account;
 using Workshop.Data;
 using Workshop.Data.Models.Account;
 using Workshop.MappingProfiles;
@@ -126,8 +127,8 @@ namespace Workshop
 
     private static void ConfigureWorkshopModules(IServiceCollection services)
     {
-     // services.RegisterAccountModule();
       services.RegisterDataModule();
+      services.RegisterAccountModule();
     }
 
     /// <summary>
