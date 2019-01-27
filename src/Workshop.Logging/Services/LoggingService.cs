@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Workshop.Data.Contracts;
 using Workshop.Data.Models.Logging;
 using Workshop.Logging.Contracts;
@@ -11,7 +9,7 @@ using Workshop.Logging.Dto;
 
 namespace Workshop.Logging.Services
 {
-    public class LoggingService: ILoggingService
+    public class LoggingService : ILoggingService
     {
         private readonly IDataService _dataService;
 
@@ -29,16 +27,22 @@ namespace Workshop.Logging.Services
             await _dataService.SaveDbAsync();
         }
 
-        public async Task<List<WorkshopLogDto>> GetLogs(int skip = 0, int take = 10)
+        public async Task<WorkshopLogListing> GetLogs(int skip = 0, int take = 10)
         {
-            var logs = await _dataService.GetSet<WorkshopLog>()
-                .OrderByDescending(x => x.Occurence)
-                .Skip(skip * take)
-                .Take(take)
-                .Select(x => Mapper.Map<WorkshopLogDto>(x))
-                .ToListAsync();
+            var logs = 
+                _dataService.GetSet<WorkshopLog>()
+                .OrderByDescending(x => x.Occurence);
 
-            return logs;
+            var result = new WorkshopLogListing
+            {
+                TotalCount = logs.Count(),
+                Logs = await logs.Skip(skip * take)
+                        .Take(take)
+                        .Select(x => Mapper.Map<WorkshopLogDto>(x))
+                        .ToListAsync()
+            };
+
+            return result;
         }
     }
 }

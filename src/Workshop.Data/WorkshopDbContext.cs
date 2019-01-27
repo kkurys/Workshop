@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using Workshop.Data.Models.Account;
+using Workshop.Data.Models.Car;
 using Workshop.Data.Models.Logging;
 
 namespace Workshop.Data
@@ -9,6 +10,9 @@ namespace Workshop.Data
     public class WorkshopDbContext: IdentityDbContext<WorkshopUser, WorkshopRole, Guid>
     {
         public DbSet<WorkshopLog> Logs { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }
+
         public WorkshopDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -16,7 +20,16 @@ namespace Workshop.Data
         {
             base.OnModelCreating(builder);
 
+            ConfigureCarImagesModel(builder);
+
             InitializeWorkshopRoles(builder);
+        }
+
+        private void ConfigureCarImagesModel(ModelBuilder builder)
+        {
+            builder.Entity<CarImage>()
+                .HasOne(x => x.Car)
+                .WithMany(x => x.Images);
         }
 
         private void InitializeWorkshopRoles(ModelBuilder builder)

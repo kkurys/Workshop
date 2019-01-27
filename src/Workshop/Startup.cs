@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Workshop.Account;
+using Workshop.Cars;
 using Workshop.Data;
 using Workshop.Data.Models.Account;
 using Workshop.Filters;
@@ -135,6 +136,7 @@ namespace Workshop
             services.RegisterDataModule();
             services.RegisterAccountModule();
             services.RegisterLoggingModule();
+            services.RegisterCarModule();
 
             ConfigureFilters(services);
         }
@@ -194,6 +196,7 @@ namespace Workshop
             {
                 cfg.AddProfile(new AccountProfile());
                 cfg.AddProfile(new LoggingProfile());
+                cfg.AddProfile(new CarProfile());
             });
 
             WorkshopDbInitializer.SeedUsers(userManager);
