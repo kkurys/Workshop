@@ -60,25 +60,35 @@ namespace Workshop
 
             ConfigureAuthentication(services);
 
+            services.AddCors(options => options
+                .AddPolicy("CorsPolicy",
+                    builder =>
+                    {
+                        builder.AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowAnyOrigin()
+                            .AllowCredentials();
+                    }));
+
             services.AddSpaStaticFiles(c =>
             {
-                c.RootPath = "wwwroot";
+                c.RootPath = "ClientApp/dist";
             });
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info
-                {
-                    Version = "v1",
-                    Title = "Workshop API",
-                    Description = "A simple example ASP.NET Core Web API",
-                });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new Info
+            //    {
+            //        Version = "v1",
+            //        Title = "Workshop API",
+            //        Description = "A simple example ASP.NET Core Web API",
+            //    });
 
-                // Set the comments path for the Swagger JSON and UI.
-                var basePath = AppContext.BaseDirectory;
-                var xmlPath = Path.Combine(basePath, "Workshop.xml");
-                c.IncludeXmlComments(xmlPath);
-            });
+            //    // Set the comments path for the Swagger JSON and UI.
+            //    var basePath = AppContext.BaseDirectory;
+            //    var xmlPath = Path.Combine(basePath, "Workshop.xml");
+            //    c.IncludeXmlComments(xmlPath);
+            //});
 
             ConfigureWorkshopModules(services);
         }
@@ -164,14 +174,15 @@ namespace Workshop
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
+            //// Enable middleware to serve generated Swagger as a JSON endpoint.
+            //app.UseSwagger();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Workshop V1");
-            });
+            //// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Workshop V1");
+            //});
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseMvc(routes =>
@@ -184,7 +195,7 @@ namespace Workshop
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "src";
+                spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
