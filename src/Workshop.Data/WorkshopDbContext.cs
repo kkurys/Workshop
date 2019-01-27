@@ -1,12 +1,14 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 using Workshop.Data.Models.Account;
+using Workshop.Data.Models.Logging;
 
 namespace Workshop.Data
 {
     public class WorkshopDbContext: IdentityDbContext<WorkshopUser, WorkshopRole, Guid>
     {
+        public DbSet<WorkshopLog> Logs { get; set; }
         public WorkshopDbContext(DbContextOptions options) : base(options)
         {
         }

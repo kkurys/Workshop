@@ -30,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Workshop.Account\Workshop.Account.csproj" />
     <ProjectReference Include="..\Workshop.Data\Workshop.Data.csproj" />
+    <ProjectReference Include="..\Workshop.Logging\Workshop.Logging.csproj" />
   </ItemGroup>
 
 </Project>

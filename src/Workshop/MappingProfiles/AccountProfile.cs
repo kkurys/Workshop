@@ -4,12 +4,12 @@ using Workshop.ViewModels.Account;
 
 namespace Workshop.MappingProfiles
 {
-  public class AccountProfile : Profile
-  {
-    public AccountProfile()
+    public class AccountProfile : Profile
     {
-      CreateMap<RegisterRequestDto, RegisterRequestViewModel>().ReverseMap();
-      CreateMap<SignInRequestDto, SignInRequestViewModel>().ReverseMap();
+        public AccountProfile()
+        {
+            CreateMap<RegisterRequestDto, RegisterRequestViewModel>().ReverseMap();
+            CreateMap<SignInRequestDto, SignInRequestViewModel>().ReverseMap();
+        }
     }
-  }
 }
