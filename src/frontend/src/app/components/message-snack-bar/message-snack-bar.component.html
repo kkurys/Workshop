@@ -1,0 +1,10 @@
+<div class="message-container">
+    <span [ngClass]="
+    {
+        'danger-text': danger,
+        'warning-text': warning,
+        'success-text': success
+    }">
+        {{ message }}
+    </span>
+</div>

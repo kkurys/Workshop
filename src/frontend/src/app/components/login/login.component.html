@@ -1,0 +1,146 @@
+<mat-grid-list cols="3">
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile>
+        <mat-accordion class="w-80">
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    Zaloguj się
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                    <mat-grid-list cols="1" rowHeight="8:1">
+                        <mat-grid-tile>
+                            <mat-form-field class="w-80">
+                                <input 
+                                    id="login-login"
+                                    matInput 
+                                    placeholder="Login"
+                                    formControlName="login"
+                                    required>
+                                <mat-error *ngIf="loginForm.hasError('required', 'login')">
+                                    Login jest <strong>wymagany</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <mat-form-field class="w-80">
+                                <input 
+                                    id="login-password"
+                                    matInput 
+                                    type="password" 
+                                    placeholder="Hasło"
+                                    formControlName="password"
+                                    required>
+                                <mat-error *ngIf="loginForm.hasError('required', 'password')">
+                                    Hasło jest <strong>wymagane</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <button type="submit" mat-flat-button color="primary">Zaloguj się</button>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                </form>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    Zarejestruj się
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <form [formGroup]="registerForm" (ngSubmit)="register()">
+                        <mat-grid-list cols="1" rowHeight="8:1">
+                            <mat-grid-tile>
+                                <mat-form-field class="w-80">
+                                    <input 
+                                        id="register-login"
+                                        matInput 
+                                        placeholder="Login"
+                                        formControlName="login"
+                                        required>
+                                    <mat-error *ngIf="loginForm.hasError('required', 'login')">
+                                        Login jest <strong>wymagany</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field class="w-80">
+                                    <input 
+                                        id="register-password"
+                                        matInput 
+                                        type="password" 
+                                        placeholder="Hasło"
+                                        formControlName="password"
+                                        required>
+                                    <mat-error *ngIf="loginForm.hasError('required', 'password')">
+                                        Hasło jest <strong>wymagane</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field class="w-80">
+                                    <input 
+                                        id="register-confirm-password"
+                                        matInput 
+                                        type="password" 
+                                        placeholder="Potwierdź hasło"
+                                        formControlName="confirmPassword"
+                                        [errorStateMatcher]="matcher"
+                                        required>
+                                    <mat-error *ngIf="registerForm.hasError('notSame')">
+                                        Hasła muszą być takie same
+                                    </mat-error>
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field class="w-80">
+                                    <input  id="register-email"
+                                            matInput 
+                                            placeholder="Email" 
+                                            formControlName="email"
+                                            required>
+                                    <mat-error *ngIf="registerForm.controls['email'].errors?.email && !registerForm.controls['email'].errors?.required">
+                                        Please enter a valid email address
+                                    </mat-error>
+                                    <mat-error *ngIf="registerForm.controls['email'].errors?.required">
+                                        Email jest <strong>wymagany</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field class="w-80">
+                                    <input  id="register-first-name"
+                                            matInput 
+                                            placeholder="Imię" 
+                                            formControlName="firstName"
+                                            required>
+                                    <mat-error *ngIf="registerForm.controls['firstName'].errors?.required">
+                                        Imię jest <strong>wymagane</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <mat-form-field class="w-80">
+                                    <input  id="register-last-name"
+                                            matInput 
+                                            placeholder="Nazwisko" 
+                                            formControlName="lastName"
+                                            required>
+                                    <mat-error *ngIf="registerForm.controls['lastName'].errors?.required">
+                                        Nazwisko jest <strong>wymagane</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </mat-grid-tile>
+                            <mat-grid-tile>
+                                <button type="submit" mat-flat-button color="primary">Zarejestruj się</button>
+                                <small class="form-text text-danger text-center error-message">{{ registerMessage }}</small>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                    </form>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>
+

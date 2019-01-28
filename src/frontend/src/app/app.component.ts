@@ -1,17 +1,23 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
-  constructor(private authService: AuthService)  {
+	title = 'Workshop';
 
-  }
-  ngOnInit() {
-    this.authService.login("admin", "Haslo123.").subscribe(x => console.log(x));
-  }
+	constructor(
+		private authService: AuthService,
+		private router: Router) {
+
+	}
+
+	logout() {
+		localStorage.clear();
+		this.router.navigateByUrl('/login');
+	}
 }
