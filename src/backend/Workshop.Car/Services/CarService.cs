@@ -7,6 +7,7 @@ using Workshop.Cars.Contracts;
 using Workshop.Cars.Dto;
 using Workshop.Common.Exceptions;
 using Workshop.Data.Contracts;
+using Workshop.Data.Models.Account;
 using Workshop.Data.Models.Car;
 
 namespace Workshop.Cars.Services
@@ -71,17 +72,18 @@ namespace Workshop.Cars.Services
             await _dataService.SaveDbAsync();
         }
 
-        public async Task<CarListingDto> GetCars(int skip = 0, int take = 10)
+        public async Task<CarListingDto> GetCars(int skip = 0, int take = 10, WorkshopUser user = null)
         {
             var cars =
                 _dataService.GetSet<Car>()
+                    .Where(x => user == null || x.OwnerId == user.Id)
                     .OrderByDescending(x => x.CreatedOn);
 
             var result = new CarListingDto
             {
                 TotalCount = cars.Count(),
-                Cars = await cars.
-                    Skip(skip * take)
+                Cars = await cars
+                    .Skip(skip * take)
                     .Take(take)
                     .Select(x => Mapper.Map<CarDto>(x))
                     .ToListAsync()

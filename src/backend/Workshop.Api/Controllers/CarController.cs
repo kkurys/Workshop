@@ -88,6 +88,15 @@ namespace Workshop.Api.Controllers
             return Json(result);
         }
 
+        public async Task<JsonResult> GetUserCars(int skip = 0, int take = 10)
+        {
+            var currentUser = await _userService.GetUserByName(HttpContext.User.Identity.Name);
+
+            var result = await _carService.GetCars(skip, take, currentUser);
+
+            return Json(result);
+        }
+
         public async Task<JsonResult> GetCarById(string id)
         {
             var result = await _carService.GetCarById(id);
