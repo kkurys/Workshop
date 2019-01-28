@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using Workshop.Data.Models.Account;
 using Workshop.Data.Models.Car;
+using Workshop.Data.Models.CarHelp;
 using Workshop.Data.Models.Logging;
 
 namespace Workshop.Data
@@ -12,6 +13,7 @@ namespace Workshop.Data
         public DbSet<WorkshopLog> Logs { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarImage> CarImages { get; set; }
+        public DbSet<CarHelpEntry> CarHelpEntries { get; set; }
 
         public WorkshopDbContext(DbContextOptions options) : base(options)
         {
@@ -22,8 +24,20 @@ namespace Workshop.Data
 
             ConfigureCarModel(builder);
             ConfigureCarImagesModel(builder);
+            ConfigureCarHelpEntryModel(builder);
 
             InitializeWorkshopRoles(builder);
+        }
+
+        private void ConfigureCarHelpEntryModel(ModelBuilder builder)
+        {
+            builder.Entity<CarHelpEntry>()
+                .HasOne(x => x.Car)
+                .WithMany(x => x.CallHelpEntries);
+
+            builder.Entity<CarHelpEntry>()
+                .HasOne(x => x.Employee)
+                .WithMany(x => x.CallHelpEntries);
         }
 
         private void ConfigureCarModel(ModelBuilder builder)

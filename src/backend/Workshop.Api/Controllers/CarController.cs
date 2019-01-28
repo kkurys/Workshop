@@ -35,7 +35,7 @@ namespace Workshop.Api.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Roles="client")]
+        [Authorize(Roles="Client")]
         public async Task CreateCar([FromBody] CreateCarRequestViewModel request)
         {
             var currentUser = await _userService.GetUserByName(HttpContext.User.Identity.Name);
@@ -53,7 +53,7 @@ namespace Workshop.Api.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPut]
-        [Authorize(Roles = "client")]
+        [Authorize(Roles = "Client")]
         public async Task UpdateCar([FromBody] UpdateCarRequestViewModel request)
         {
             var model = Mapper.Map<UpdateCarRequestDto>(request);
@@ -67,7 +67,7 @@ namespace Workshop.Api.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Roles = "client")]
+        [Authorize(Roles = "Client")]
         public async Task DeleteCar([FromBody] DeleteCarRequestViewModel request)
         {
             var model = Mapper.Map<DeleteCarRequestDto>(request);

@@ -13,6 +13,7 @@ using System.Text;
 using Workshop.Account;
 using Workshop.Api.Filters;
 using Workshop.Api.MappingProfiles;
+using Workshop.CarHelp;
 using Workshop.Cars;
 using Workshop.Data;
 using Workshop.Data.Models.Account;
@@ -140,6 +141,7 @@ namespace Workshop.Api
             services.RegisterAccountModule();
             services.RegisterLoggingModule();
             services.RegisterCarModule();
+            services.RegisterCarHelpModule();
 
             ConfigureFilters(services);
         }
@@ -185,6 +187,7 @@ namespace Workshop.Api
                 cfg.AddProfile(new AccountProfile());
                 cfg.AddProfile(new LoggingProfile());
                 cfg.AddProfile(new CarProfile());
+                cfg.AddProfile(new CarHelpProfile());
             });
 
             WorkshopDbInitializer.SeedUsers(userManager);
