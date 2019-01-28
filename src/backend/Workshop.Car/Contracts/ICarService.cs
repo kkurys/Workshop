@@ -9,5 +9,6 @@ namespace Workshop.Cars.Contracts
         Task UpdateCar(UpdateCarRequestDto request);
         Task DeleteCar(DeleteCarRequestDto request);
         Task<CarListingDto> GetCars(int skip = 0, int take = 10);
+        Task<CarDto> GetCarById(string id);
     }
 }

@@ -74,5 +74,18 @@ namespace Workshop.Api.Controllers
 
             return Json(result);
         }
+
+        public async Task<JsonResult> GetCarById(string id)
+        {
+            var result = await _carService.GetCarById(id);
+
+            var response = new CarResponseViewModel
+            {
+                Car = result
+            };
+
+            return Json(response);
+        }
+
     }
 }

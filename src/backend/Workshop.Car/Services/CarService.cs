@@ -88,5 +88,14 @@ namespace Workshop.Cars.Services
 
             return result;
         }
+
+        public async Task<CarDto> GetCarById(string id)
+        {
+            var car = await _dataService.GetSet<Car>().FirstOrDefaultAsync(x => x.Id.ToString() == id);
+
+            var result = Mapper.Map<CarDto>(car);
+
+            return result;
+        }
     }
 }
