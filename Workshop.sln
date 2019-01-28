@@ -21,13 +21,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{87868026
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EA5BB2B4-E0C5-4E85-8721-7D264E7E1B7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.CarHelp.Tests", "src\backend\tests\Workshop.CarHelp.Tests\Workshop.CarHelp.Tests.csproj", "{D2657220-2D57-453E-9882-015FBD6B4BC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.CarHelp.Tests", "src\backend\tests\Workshop.CarHelp.Tests\Workshop.CarHelp.Tests.csproj", "{D2657220-2D57-453E-9882-015FBD6B4BC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.Cars.Tests", "src\backend\tests\Workshop.Cars.Tests\Workshop.Cars.Tests.csproj", "{3F81547B-000D-4772-9BB2-D503A7F57E3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.Cars.Tests", "src\backend\tests\Workshop.Cars.Tests\Workshop.Cars.Tests.csproj", "{3F81547B-000D-4772-9BB2-D503A7F57E3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.TestUtils", "src\backend\tests\Workshop.TestUtils\Workshop.TestUtils.csproj", "{78C1A0A3-5828-4C14-8861-946671C37D93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.TestUtils", "src\backend\tests\Workshop.TestUtils\Workshop.TestUtils.csproj", "{78C1A0A3-5828-4C14-8861-946671C37D93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.Integration.Tests", "src\backend\tests\Workshop.Integration.Tests\Workshop.Integration.Tests.csproj", "{0069C5B5-A2DB-4F89-8C8C-89215DB6A587}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.Integration.Tests", "src\backend\tests\Workshop.Integration.Tests\Workshop.Integration.Tests.csproj", "{0069C5B5-A2DB-4F89-8C8C-89215DB6A587}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EDEED17A-2E6B-4F9A-996A-3BDFE0E1E24E}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		docfx_project\docfx.json = docfx_project\docfx.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

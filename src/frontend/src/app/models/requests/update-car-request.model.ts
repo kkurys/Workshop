@@ -1,6 +1,7 @@
 export class UpdateCarRequest {
     constructor(
-        public Year: number, 
-        public Model: string,
-        public Description: string) { }
+        public id: string,
+        public year: number, 
+        public model: string,
+        public description: string) { }
 }

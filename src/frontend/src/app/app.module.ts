@@ -15,13 +15,14 @@ import { HomeComponent } from './components/home/home.component';
 import { CarsComponent } from './components/cars/cars.component';
 import { CarComponent } from './components/car/car.component';
 import { CarHelpEntryComponent } from './components/car-help-entry/car-help-entry.component';
-
+import { LogsComponent } from './components/logs/logs.component';
 import { MessageSnackBarComponent } from './components/message-snack-bar/message-snack-bar.component';
 
 /* SERVICES */
 import { AuthService } from './services/auth.service';
 import { CarService } from './services/car.service';
 import { CarHelpEntryService } from './services/car-help-entry.service';
+import { LoggingService } from './services/logging.service';
 
 /* UTILS */
 import { RolesUtil } from './utils/roles.util';
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
 	{ path: 'car', component: CarComponent, canActivate: [AuthGuard] },
 	{ path: 'car-help-entry/:id', component: CarHelpEntryComponent, canActivate: [ManagerGuard] },
 	{ path: 'car-help-entry/:carId', component: CarHelpEntryComponent, canActivate: [ManagerGuard] },
-	{ path: 'car-help-entry', component: CarHelpEntryComponent, canActivate: [ManagerGuard] }
+	{ path: 'car-help-entry', component: CarHelpEntryComponent, canActivate: [ManagerGuard] },
+	{ path: 'logs', component: LogsComponent, canActivate: [AdminGuard]}
 
 ];
 
@@ -55,7 +57,8 @@ const appRoutes: Routes = [
 		MessageSnackBarComponent,
 		CarsComponent,
 		CarComponent,
-		CarHelpEntryComponent
+		CarHelpEntryComponent,
+		LogsComponent
 	],
 	imports: [
 		BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -80,7 +83,8 @@ const appRoutes: Routes = [
 		JwtUtil,
 		RolesUtil,
 		TimeUtil,
-		StatusesUtil
+		StatusesUtil,
+		LoggingService
 	],
 	entryComponents: [
 		MessageSnackBarComponent

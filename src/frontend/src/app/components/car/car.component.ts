@@ -19,7 +19,7 @@ import { StatusesUtil } from 'src/app/utils/statuses.util';
 })
 export class CarComponent implements OnInit {
     private sub: any;
-    id: number;
+    id: string;
     edit: Boolean;
     form: FormGroup;
     car: Car;
@@ -69,7 +69,7 @@ export class CarComponent implements OnInit {
         });
     }
 
-    getCar(id: number) {
+    getCar(id: string) {
         this.carService
             .getCarById(this.id)
             .subscribe(response => {
@@ -80,7 +80,7 @@ export class CarComponent implements OnInit {
             });
     }
 
-    getCarHelpEntires(carId: number) {
+    getCarHelpEntires(carId: string) {
         this.carHelpEntryService
             .getCarHelpEntries(carId, Number.MAX_VALUE, 0)
             .subscribe(response => {
@@ -96,6 +96,7 @@ export class CarComponent implements OnInit {
         if (this.edit) {
             this.carService
                 .updateCar(
+                    this.id,
                     this.form.controls.year.value,
                     this.form.controls.model.value,
                     this.form.controls.description.value
