@@ -132,6 +132,10 @@ span {
     color: #74ffa6;
 }
 
+.text-faded {
+    color: #aaaaaa;
+}
+
 .aligned-with-icon {
     position: relative;
     top: -6px;

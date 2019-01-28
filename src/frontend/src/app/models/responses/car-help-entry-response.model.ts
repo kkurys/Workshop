@@ -1,6 +1,6 @@
 import { CarHelpEntry } from '../car-help-entry.model';
 
-export class CarResponse {
+export class CarHelpEntryResponse {
     constructor(
         public carHelpEntries: CarHelpEntry[]) { }
 }

@@ -62,16 +62,17 @@
         <div class="col-md-12">
             
         <mat-accordion class="w-80">
-            <mat-expansion-panel>
+            <mat-expansion-panel *ngFor="let carHelpEntry of carHelpEntires">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        <span>Remont silnika (28.01.2019, 14:30) - <strong>Gotowy do odbioru</strong></span>
+                        <span>{{ carHelpEntry.name }} ({{ carHelpEntry.created }}) - <strong>{{ carHelpEntry.status }}</strong></span>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
+                <p>{{ carHelpEntry.description }}</p>
 
-                <p>Wymiana uszczelki pod głowicą, uszczelki kolektora ssącego, uszczelki kolektora wydechowego, wymiana pierścieni tłokowych, planowanie głowicy</p>
-
-                <p><strong>Koszt:</strong> 2850 zł</p>
+                <p><strong>Koszt:</strong> {{ carHelpEntry.price }} zł</p>
+                <br>
+                <p class="text-faded">Aktualizacja: {{ carHelpEntry.updated }}</p>
             </mat-expansion-panel>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>

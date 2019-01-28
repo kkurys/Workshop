@@ -5,6 +5,7 @@ import { Car } from 'src/app/models/car.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CarHelpEntry } from 'src/app/models/car-help-entry.model';
+import { CarHelpEntryService } from 'src/app/services/car-help-entry.service';
 
 @Component({
   selector: 'app-car',
@@ -17,13 +18,14 @@ export class CarComponent implements OnInit {
     edit: Boolean;
     form: FormGroup;
     car: Car;
-    services: CarHelpEntry[];
+    carHelpEntires: CarHelpEntry[];
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private formBuilder: FormBuilder,
-        private carService: CarService
+        private carService: CarService,
+        private carHelpEntryService: CarHelpEntryService
     ) {
         
 		this.form = this.formBuilder.group({
@@ -54,7 +56,7 @@ export class CarComponent implements OnInit {
             } else {
                 this.edit = true;
                 this.getCar(this.id);
-                this.getServices(this.id);
+                this.getCarHelpEntires(this.id);
             }
             console.log(this.edit);
         });
@@ -68,11 +70,15 @@ export class CarComponent implements OnInit {
                 this.form.controls.year.setValue(this.car.year);
                 this.form.controls.model.setValue(this.car.model);
                 this.form.controls.description.setValue(this.car.description);
-            })
+            });
     }
 
-    getServices(carId: number) {
-        
+    getCarHelpEntires(carId: number) {
+        this.carHelpEntryService
+            .getCarHelpEntries(carId, Number.MAX_VALUE, 0)
+            .subscribe(response => {
+                this.carHelpEntires = response.carHelpEntries;
+            });
     }
 
     backToList() {

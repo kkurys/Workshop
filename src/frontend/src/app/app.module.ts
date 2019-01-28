@@ -28,6 +28,7 @@ import { AuthGuard } from './utils/auth-guard.util';
 import { ManagerGuard } from './utils/manager-guard.util';
 import { ClientGuard } from './utils/client-guard.util';
 import { AdminGuard } from './utils/admin-guard.util';
+import { CarHelpEntryService } from './services/car-help-entry.service';
 
 
 const appRoutes: Routes = [
@@ -68,6 +69,7 @@ const appRoutes: Routes = [
 		ClientGuard,
 		AuthService,
 		CarService,
+		CarHelpEntryService,
 		JwtUtil,
 		RolesUtil
 	],
