@@ -36,13 +36,13 @@ export class CarService extends BaseService {
         let updateCarModel = new UpdateCarRequest(year, model, description);
         let url = this.baseUrl + 'Car/UpdateCar';
 
-        return this.http.post<CarResponse>(url, updateCarModel);
+        return this.http.post<CarResponse>(url, updateCarModel, { headers: this.headers });
     }
 
     createCar(year: number, model: string, description: string) {
         let createCarModel = new CreateCarRequest(year, model, description);
         let url = this.baseUrl + 'Car/CreateCar';
 
-        return this.http.post<CarResponse>(url, createCarModel);
+        return this.http.post<CarResponse>(url, createCarModel, { headers: this.headers });
     }
 }
