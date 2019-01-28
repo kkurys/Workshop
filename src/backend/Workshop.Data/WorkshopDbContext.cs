@@ -20,9 +20,17 @@ namespace Workshop.Data
         {
             base.OnModelCreating(builder);
 
+            ConfigureCarModel(builder);
             ConfigureCarImagesModel(builder);
 
             InitializeWorkshopRoles(builder);
+        }
+
+        private void ConfigureCarModel(ModelBuilder builder)
+        {
+            builder.Entity<Car>()
+                .HasOne(x => x.Owner)
+                .WithMany(x => x.Cars);
         }
 
         private void ConfigureCarImagesModel(ModelBuilder builder)

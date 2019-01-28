@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 
 namespace Workshop.Data.Models.Account
 {
@@ -7,5 +8,6 @@ namespace Workshop.Data.Models.Account
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public virtual ICollection<Car.Car> Cars { get; set; }
     }
 }

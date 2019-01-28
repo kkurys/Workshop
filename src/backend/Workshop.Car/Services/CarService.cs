@@ -27,7 +27,8 @@ namespace Workshop.Cars.Services
                 Year = request.Year,
                 Description = request.Description,
                 Model = request.Model,
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow,
+                Owner = request.User
             };
 
             await _dataService.GetSet<Car>().AddAsync(car);
@@ -85,6 +86,15 @@ namespace Workshop.Cars.Services
                     .Select(x => Mapper.Map<CarDto>(x))
                     .ToListAsync()
             };
+
+            return result;
+        }
+
+        public async Task<CarDto> GetCarById(string id)
+        {
+            var car = await _dataService.GetSet<Car>().FirstOrDefaultAsync(x => x.Id.ToString() == id);
+
+            var result = Mapper.Map<CarDto>(car);
 
             return result;
         }
