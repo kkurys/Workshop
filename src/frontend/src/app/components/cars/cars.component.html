@@ -11,6 +11,9 @@
                                 <h4 mat-line>{{ car.model }} ({{ car.year }})</h4>
                                 <p mat-line>{{ car.description }}</p>
                             </mat-list-item>
+                            <div class="text-center" *ngIf="cars.length === 0">
+                                <h4>Brak dostępnych samochodów</h4>
+                            </div>
                         </mat-list>
                     </mat-card-content>
                     <mat-card-actions class="text-center">

@@ -23,6 +23,16 @@ export class CarService extends BaseService {
         return this.http.get<CarsResponse>(url, { params: params, headers: this.headers });
     }
 
+    getUserCars(take, skip) {
+        let url = this.baseUrl + 'Car/GetUserCars';
+
+        let params = new HttpParams()
+            .set("take", take)
+            .set("skip", skip);
+
+        return this.http.get<CarsResponse>(url, { params: params, headers: this.headers });
+    }
+
     getCarById(id) {
         let url = this.baseUrl + 'Car/GetCarById';
 

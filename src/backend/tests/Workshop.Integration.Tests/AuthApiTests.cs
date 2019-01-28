@@ -37,6 +37,7 @@ namespace Workshop.Integration.Tests
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299
+
             var content = await response.Content.ReadAsStringAsync();
             content.Should().NotBeNullOrWhiteSpace();
         }

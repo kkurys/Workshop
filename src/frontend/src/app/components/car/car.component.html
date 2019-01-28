@@ -60,22 +60,46 @@
     </div>
     <div class="row mt-20" *ngIf="edit">
         <div class="col-md-12">
-            
-        <mat-accordion class="w-80">
-            <mat-expansion-panel *ngFor="let carHelpEntry of carHelpEntires">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <span>{{ carHelpEntry.name }} <span class="text-faded">({{ timeUtil.formatDate(carHelpEntry.created) }})</span> - <strong>{{ carHelpEntry.status }}</strong></span>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <p><strong>Opis:</strong> {{ carHelpEntry.description }}</p>
-                <p><strong>Zlecone przez:</strong> {{ carHelpEntry.EmployeeName }}</p>
+            <mat-accordion class="w-80">
+                <mat-expansion-panel *ngFor="let carHelpEntry of carHelpEntires">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span>{{ carHelpEntry.name }} <span class="text-faded">({{ timeUtil.formatDate(carHelpEntry.created) }})</span> - <strong>{{ statusesUtil.getStatusName(carHelpEntry.status) }}</strong></span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p><strong>Opis:</strong> {{ carHelpEntry.description }}</p>
+                    <p><strong>Zlecone przez:</strong> {{ carHelpEntry.EmployeeName }}</p>
 
-                <p><strong>Koszt:</strong> {{ carHelpEntry.price }} zł</p>
-                <br>
-                <p class="text-faded">Aktualizacja: {{ timeUtil.formatDate(carHelpEntry.updated) }}</p>
-            </mat-expansion-panel>
-        </mat-accordion>
+                    <p><strong>Koszt:</strong> {{ carHelpEntry.price }} zł</p>
+                    <br>
+                    <p class="text-faded">Aktualizacja: {{ timeUtil.formatDate(carHelpEntry.updated) }}</p>
+
+                    
+                    <button 
+                        *ngIf="canManage()"
+                        mat-flat-button 
+                        color="accent" 
+                        class="appointment-button" 
+                        [routerLinkActive]='["active"]' 
+                        [routerLinkActiveOptions]='{ exact: true }' 
+                        (click)=editCarHelpEntry(carHelpEntry.carHelpId)>
+                        Edytuj
+                    </button>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+    <div class="row mt-20" *ngIf="canManage()">
+        <div class="col-md-12">
+            <button 
+                mat-flat-button 
+                color="primary" 
+                class="appointment-button" 
+                [routerLinkActive]='["active"]' 
+                [routerLinkActiveOptions]='{ exact: true }'
+                (click)=createCarHelpEntry()>
+                Dodaj serwis
+            </button>
         </div>
     </div>
 </div>

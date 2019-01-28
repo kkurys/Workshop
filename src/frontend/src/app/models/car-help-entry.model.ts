@@ -1,6 +1,6 @@
 export class CarHelpEntry {
     constructor(
-        public id: String, 
+        public carHelpId: String, 
         public name: String,
         public description: String,
         public created: Date,
