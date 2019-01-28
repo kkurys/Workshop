@@ -4,6 +4,7 @@ import { getLocalRefs } from '@angular/core/src/render3/discovery_utils';
 import { Car } from 'src/app/models/car.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Service } from 'src/app/models/service.model';
 
 @Component({
   selector: 'app-car',
@@ -16,6 +17,7 @@ export class CarComponent implements OnInit {
     edit: Boolean;
     form: FormGroup;
     car: Car;
+    services: Service[];
 
     constructor(
         private route: ActivatedRoute,
@@ -27,7 +29,7 @@ export class CarComponent implements OnInit {
 		this.form = this.formBuilder.group({
 			year: [
 				new Date().getFullYear(),
-				[Validators.required, Validators.min(1800), Validators.max(new Date().getFullYear())]
+				[Validators.required, Validators.min(1885), Validators.max(new Date().getFullYear())]
 			],
 			model: [
 				'',
@@ -43,12 +45,12 @@ export class CarComponent implements OnInit {
         this.sub = this.route.params.subscribe(params => {
             this.id = params['id'];
 
-            debugger;
             if (this.id === undefined) {
                 this.edit = false;
             } else {
                 this.edit = true;
                 this.getCar(this.id);
+                this.getServices(this.id);
             }
             console.log(this.edit);
         });
@@ -63,6 +65,14 @@ export class CarComponent implements OnInit {
                 this.form.controls.model.setValue(this.car.model);
                 this.form.controls.description.setValue(this.car.description);
             })
+    }
+
+    getServices(carId: number) {
+        
+    }
+
+    backToList() {
+        this.router.navigateByUrl('cars');
     }
 
     submit() {
