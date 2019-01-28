@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Workshop.Account.Contracts;
 using Workshop.Api.ViewModels.Car;
 using Workshop.Cars.Contracts;
 using Workshop.Cars.Dto;
@@ -10,17 +12,21 @@ namespace Workshop.Api.Controllers
     /// <summary>
     /// Car api methods
     /// </summary>
+    [Authorize]
     public class CarController: WorkshopBaseController
     {
         private readonly ICarService _carService;
+        private readonly IUserService _userService;
 
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="carService"></param>
-        public CarController(ICarService carService)
+        /// <param name="userService"></param>
+        public CarController(ICarService carService, IUserService userService)
         {
             _carService = carService;
+            _userService = userService;
         }
 
         /// <summary>
@@ -29,9 +35,14 @@ namespace Workshop.Api.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles="client")]
         public async Task CreateCar([FromBody] CreateCarRequestViewModel request)
         {
+            var currentUser = await _userService.GetUserByName(HttpContext.User.Identity.Name);
+
             var model = Mapper.Map<CreateCarRequestDto>(request);
+
+            model.User = currentUser;
 
             await _carService.CreateCar(model);
         }
@@ -42,6 +53,7 @@ namespace Workshop.Api.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize(Roles = "client")]
         public async Task UpdateCar([FromBody] UpdateCarRequestViewModel request)
         {
             var model = Mapper.Map<UpdateCarRequestDto>(request);
@@ -55,6 +67,7 @@ namespace Workshop.Api.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles = "client")]
         public async Task DeleteCar([FromBody] DeleteCarRequestViewModel request)
         {
             var model = Mapper.Map<DeleteCarRequestDto>(request);
@@ -86,6 +99,5 @@ namespace Workshop.Api.Controllers
 
             return Json(response);
         }
-
     }
 }

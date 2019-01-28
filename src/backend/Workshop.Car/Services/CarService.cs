@@ -27,7 +27,8 @@ namespace Workshop.Cars.Services
                 Year = request.Year,
                 Description = request.Description,
                 Model = request.Model,
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow,
+                Owner = request.User
             };
 
             await _dataService.GetSet<Car>().AddAsync(car);
