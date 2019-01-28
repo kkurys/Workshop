@@ -71,6 +71,21 @@ namespace Workshop.CarHelp.Services
             return result;
         }
 
+        public async Task DeleteCarHelpEntry(DeleteCarHelpRequestDto request)
+        {
+            var carHelpEntrySet = _dataService.GetSet<CarHelpEntry>();
+            var model = await carHelpEntrySet.FirstOrDefaultAsync(x => x.Id.ToString() == request.Id);
+
+            if (model == null)
+            {
+                throw new InvalidCarHelpEntryIdException();
+            }
+
+            carHelpEntrySet.Remove(model);
+
+            await _dataService.SaveDbAsync();
+        }
+
         public async Task UpdateCarHelpEntry(UpdateCarHelpEntryRequestDto request)
         {
             var carHelpEntrySet = _dataService.GetSet<CarHelpEntry>();

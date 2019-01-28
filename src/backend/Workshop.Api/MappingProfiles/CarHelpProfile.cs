@@ -21,6 +21,7 @@ namespace Workshop.Api.MappingProfiles
 
             CreateMap<CreateCarHelpRequestViewModel, CreateCarHelpEntryRequestDto>().ReverseMap();
             CreateMap<UpdateCarHelpRequestViewModel, UpdateCarHelpEntryRequestDto>().ReverseMap();
+            CreateMap<DeleteCarHelpRequestViewModel, DeleteCarHelpRequestDto>().ReverseMap();
         }
     }
 }
