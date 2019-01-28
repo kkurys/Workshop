@@ -1,10 +1,10 @@
-using FluentAssertions;
-using Moq;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Moq;
+using NUnit.Framework;
 using Workshop.Cars.Contracts;
 using Workshop.Cars.Dto;
 using Workshop.Cars.Services;
@@ -14,12 +14,12 @@ using Workshop.TestUtils;
 
 namespace Workshop.Cars.Tests
 {
-
     [TestFixture]
     public class CarServiceTests
     {
         private readonly Mock<IDataService> _fakeDb;
         private ICarService _sut;
+
         public CarServiceTests()
         {
             _fakeDb = new Mock<IDataService>();
@@ -50,20 +50,48 @@ namespace Workshop.Cars.Tests
         }
 
         [Test]
+        public async Task GetCars_Invoke()
+        {
+            var car = new Car
+            {
+                Id = Guid.NewGuid(),
+                Description = "test",
+                Model = "test"
+            };
+            var car2 = new Car
+            {
+                Id = Guid.NewGuid(),
+                Description = "test2",
+                Model = "tes2t"
+            };
+
+            var cars = new List<Car> {car, car2}.AsQueryable();
+
+            var mockCarSet = FakeDbSetFactory<Car>.Get(cars);
+
+            _fakeDb.Setup(m => m.GetSet<Car>()).Returns(mockCarSet.Object);
+            _sut = new CarService(_fakeDb.Object);
+
+            var result = await _sut.GetCars();
+
+            result.TotalCount.Should().Be(2);
+        }
+
+        [Test]
         public async Task UpdateCar_Invoke()
         {
             var car = new Car
             {
                 Id = Guid.NewGuid(),
                 Description = "test",
-                Model = "test",
+                Model = "test"
             };
 
             var dto = new UpdateCarRequestDto
             {
                 Id = car.Id.ToString(),
                 Description = "edited_desc",
-                Model = "edited",
+                Model = "edited"
             };
 
             var cars = new List<Car> {car}.AsQueryable();
@@ -80,34 +108,6 @@ namespace Workshop.Cars.Tests
 
             car.Model.Should().Be(dto.Model);
             car.Description.Should().Be(dto.Description);
-        }
-
-        [Test]
-        public async Task GetCars_Invoke()
-        {
-            var car = new Car
-            {
-                Id = Guid.NewGuid(),
-                Description = "test",
-                Model = "test",
-            };
-            var car2 = new Car
-            {
-                Id = Guid.NewGuid(),
-                Description = "test2",
-                Model = "tes2t",
-            };
-
-            var cars = new List<Car> { car, car2 }.AsQueryable();
-
-            var mockCarSet = FakeDbSetFactory<Car>.Get(cars);
-
-            _fakeDb.Setup(m => m.GetSet<Car>()).Returns(mockCarSet.Object);
-            _sut = new CarService(_fakeDb.Object);
-
-            var result = await _sut.GetCars();
-
-            result.TotalCount.Should().Be(2);
         }
     }
 }

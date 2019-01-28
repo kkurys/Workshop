@@ -6,9 +6,9 @@ using Workshop.Api.ViewModels.Account;
 namespace Workshop.Api.Controllers
 {
     /// <summary>
-    /// User endpoint
+    ///     User endpoint
     /// </summary>
-    public class UserController: WorkshopBaseController
+    public class UserController : WorkshopBaseController
     {
         private readonly IUserService _userService;
 
@@ -18,7 +18,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint for fetching users
+        ///     Endpoint for fetching users
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -30,7 +30,7 @@ namespace Workshop.Api.Controllers
             {
                 Users = result
             };
-            
+
             return Json(response);
         }
     }

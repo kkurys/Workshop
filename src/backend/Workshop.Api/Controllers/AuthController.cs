@@ -8,14 +8,14 @@ using Workshop.Api.ViewModels.Account;
 namespace Workshop.Api.Controllers
 {
     /// <summary>
-    /// Api endpoint for sign in and registration
+    ///     Api endpoint for sign in and registration
     /// </summary>
     public class AuthController : WorkshopBaseController
     {
         private readonly IAuthService _authService;
 
         /// <summary>
-        /// Auth controller ctor
+        ///     Auth controller ctor
         /// </summary>
         /// <param name="authService"></param>
         public AuthController(IAuthService authService)
@@ -24,7 +24,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Api method for register
+        ///     Api method for register
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -39,7 +39,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Api method for sign in
+        ///     Api method for sign in
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
