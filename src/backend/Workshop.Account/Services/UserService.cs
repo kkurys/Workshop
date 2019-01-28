@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Workshop.Account.Contracts;
 using Workshop.Account.Dto;
-using Workshop.Data.Contracts;
 using Workshop.Data.Models.Account;
 
 namespace Workshop.Account.Services
@@ -24,10 +23,11 @@ namespace Workshop.Account.Services
         {
             var users = await _userManager
                 .Users
-                .Select(x => Mapper.Map<UserDto>(x))
                 .ToListAsync();
 
-            return users;
+            var result = users.Select(x => Mapper.Map<UserDto>(x)).ToList();
+
+            return result;
         }
 
         public async Task<UserDto> GetUserAsync(string id)
