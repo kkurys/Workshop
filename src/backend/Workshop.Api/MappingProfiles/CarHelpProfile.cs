@@ -5,7 +5,7 @@ using Workshop.Data.Models.CarHelp;
 
 namespace Workshop.Api.MappingProfiles
 {
-    public class CarHelpProfile: Profile
+    public class CarHelpProfile : Profile
     {
         public CarHelpProfile()
         {

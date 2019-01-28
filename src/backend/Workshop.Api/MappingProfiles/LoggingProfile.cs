@@ -4,7 +4,7 @@ using Workshop.Logging.Dto;
 
 namespace Workshop.Api.MappingProfiles
 {
-    public class LoggingProfile: Profile
+    public class LoggingProfile : Profile
     {
         public LoggingProfile()
         {

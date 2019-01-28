@@ -10,10 +10,7 @@ namespace Workshop.Cars.Tests
         [OneTimeSetUp]
         public void ConfigureAutomapper()
         {
-            Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile(new CarProfile());
-            });
+            Mapper.Initialize(cfg => { cfg.AddProfile(new CarProfile()); });
         }
     }
 }

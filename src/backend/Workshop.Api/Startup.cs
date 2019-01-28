@@ -1,3 +1,5 @@
+using System;
+using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -8,8 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Text;
 using Workshop.Account;
 using Workshop.Api.Filters;
 using Workshop.Api.MappingProfiles;
@@ -22,17 +22,12 @@ using Workshop.Logging;
 namespace Workshop.Api
 {
     /// <summary>
-    /// Startup class
+    ///     Startup class
     /// </summary>
     public class Startup
     {
         /// <summary>
-        /// Configuration prop
-        /// </summary>
-        public IConfiguration Configuration { get; }
-
-        /// <summary>
-        /// Startup class ctor
+        ///     Startup class ctor
         /// </summary>
         /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
@@ -41,18 +36,23 @@ namespace Workshop.Api
         }
 
         /// <summary>
-        /// Configures app the services.
+        ///     Configuration prop
+        /// </summary>
+        public IConfiguration Configuration { get; }
+
+        /// <summary>
+        ///     Configures app the services.
         /// </summary>
         /// <param name="services">The services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options =>
-                options.Filters.AddService<LogExceptionFilter>()             
+                options.Filters.AddService<LogExceptionFilter>()
             ).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<WorkshopDbContext>(options =>
-              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-                o => o.MigrationsAssembly("Workshop.Data")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                    o => o.MigrationsAssembly("Workshop.Data")));
 
             ConfigureIdentity(services);
 
@@ -86,11 +86,12 @@ namespace Workshop.Api
 
             ConfigureWorkshopModules(services);
         }
+
         private static void ConfigureIdentity(IServiceCollection services)
         {
             services.AddIdentity<WorkshopUser, WorkshopRole>()
-              .AddEntityFrameworkStores<WorkshopDbContext>()
-              .AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<WorkshopDbContext>()
+                .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -106,7 +107,7 @@ namespace Workshop.Api
                 options.Lockout.AllowedForNewUsers = true;
 
                 options.User.AllowedUserNameCharacters =
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = false;
             });
         }
@@ -115,24 +116,24 @@ namespace Workshop.Api
         {
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]));
             services
-              .AddAuthentication(options =>
-              {
-                  options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                  options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-              })
-              .AddJwtBearer(config =>
-              {
-                  config.RequireHttpsMetadata = false;
-                  config.SaveToken = true;
-                  config.TokenValidationParameters = new TokenValidationParameters
-                  {
-                      IssuerSigningKey = signingKey,
-                      ValidateLifetime = true,
-                      ValidateAudience = false,
-                      ValidateIssuer = false,
-                      ValidateIssuerSigningKey = true
-                  };
-              });
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(config =>
+                {
+                    config.RequireHttpsMetadata = false;
+                    config.SaveToken = true;
+                    config.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        IssuerSigningKey = signingKey,
+                        ValidateLifetime = true,
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        ValidateIssuerSigningKey = true
+                    };
+                });
         }
 
         private static void ConfigureWorkshopModules(IServiceCollection services)
@@ -152,7 +153,7 @@ namespace Workshop.Api
         }
 
         /// <summary>
-        /// Configures the application.
+        ///     Configures the application.
         /// </summary>
         /// <param name="app">The application.</param>
         /// <param name="env">The hosting environment</param>
@@ -161,10 +162,7 @@ namespace Workshop.Api
         {
             UpdateDatabase(app);
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseAuthentication();
             app.UseCors("CorsPolicy");
@@ -177,10 +175,7 @@ namespace Workshop.Api
             //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Workshop V1");
             //});
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(name: "default", template: "{controller}/{action=index}/{id}");
-            });
+            app.UseMvc(routes => { routes.MapRoute("default", "{controller}/{action=index}/{id}"); });
 
             Mapper.Initialize(cfg =>
             {
@@ -196,8 +191,8 @@ namespace Workshop.Api
         private static void UpdateDatabase(IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices
-              .GetRequiredService<IServiceScopeFactory>()
-              .CreateScope())
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
             {
                 using (var context = serviceScope.ServiceProvider.GetService<WorkshopDbContext>())
                 {

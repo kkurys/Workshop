@@ -1,16 +1,16 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Workshop.Account.Contracts;
 using Workshop.Account.Dto;
 using Workshop.Data.Models.Account;
 
 namespace Workshop.Account.Services
 {
-    public class UserService: IUserService
+    public class UserService : IUserService
     {
         private readonly UserManager<WorkshopUser> _userManager;
 

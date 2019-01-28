@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace Workshop.Data.Models.Account
 {
-    public class WorkshopRole: IdentityRole<Guid>
+    public class WorkshopRole : IdentityRole<Guid>
     {
     }
 }
