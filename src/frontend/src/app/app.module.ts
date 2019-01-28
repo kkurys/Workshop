@@ -29,6 +29,7 @@ import { ManagerGuard } from './utils/manager-guard.util';
 import { ClientGuard } from './utils/client-guard.util';
 import { AdminGuard } from './utils/admin-guard.util';
 import { CarHelpEntryService } from './services/car-help-entry.service';
+import { TimeUtil } from './utils/time.util';
 
 
 const appRoutes: Routes = [
@@ -71,7 +72,8 @@ const appRoutes: Routes = [
 		CarService,
 		CarHelpEntryService,
 		JwtUtil,
-		RolesUtil
+		RolesUtil,
+		TimeUtil
 	],
 	entryComponents: [
 		MessageSnackBarComponent

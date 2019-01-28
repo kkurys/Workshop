@@ -7,6 +7,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CarHelpEntry } from 'src/app/models/car-help-entry.model';
 import { CarHelpEntryService } from 'src/app/services/car-help-entry.service';
 
+import * as moment from 'moment';
+import { TimeUtil } from 'src/app/utils/time.util';
+
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
@@ -25,7 +28,8 @@ export class CarComponent implements OnInit {
         private router: Router,
         private formBuilder: FormBuilder,
         private carService: CarService,
-        private carHelpEntryService: CarHelpEntryService
+        private carHelpEntryService: CarHelpEntryService,
+        private timeUtil: TimeUtil
     ) {
         
 		this.form = this.formBuilder.group({
@@ -58,7 +62,6 @@ export class CarComponent implements OnInit {
                 this.getCar(this.id);
                 this.getCarHelpEntires(this.id);
             }
-            console.log(this.edit);
         });
     }
 
