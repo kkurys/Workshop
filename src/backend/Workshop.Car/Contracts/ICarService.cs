@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Workshop.Cars.Dto;
+using Workshop.Data.Models.Account;
 
 namespace Workshop.Cars.Contracts
 {
@@ -8,7 +9,8 @@ namespace Workshop.Cars.Contracts
         Task CreateCar(CreateCarRequestDto request);
         Task UpdateCar(UpdateCarRequestDto request);
         Task DeleteCar(DeleteCarRequestDto request);
-        Task<CarListingDto> GetCars(int skip = 0, int take = 10);
+        Task<CarListingDto> GetCars(int skip = 0, int take = 10, WorkshopUser user = null);
         Task<CarDto> GetCarById(string id);
+
     }
 }
