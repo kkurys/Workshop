@@ -41,5 +41,19 @@ namespace Workshop.Integration.Tests
             var content = await response.Content.ReadAsStringAsync();
             content.Should().NotBeNullOrWhiteSpace();
         }
+
+        [Theory]
+        [InlineData("/api/Logging/GetLogs")]
+        public async Task GetLogs_ReturnSuccess(string url)
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            // Act
+            var response = await client.GetAsync(url);
+
+            // Assert
+            response.EnsureSuccessStatusCode(); // Status Code 200-299
+        }
     }
 }
