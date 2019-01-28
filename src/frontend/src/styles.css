@@ -216,3 +216,16 @@ span {
     border-bottom: 1px solid #e5e5e5;
 }
 /* --- */
+
+
+/* --- OVERRIDE ANGULAR MATERIAL */
+.admin .mat-list-item:hover {
+    background-color: #dadada;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.admin .mat-list-item p {
+    color: #848484;
+}
+/* --- */

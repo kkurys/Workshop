@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2" *ngIf="edit">Edycja samochodu</h1>
+    <h1 class="h2" *ngIf="!edit">Dodawanie samochodu</h1>
+</div>
+<div class="container admin">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-card class="example-card">
+                    <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+                        <mat-card-content>
+                            <mat-grid-list cols="1" rowHeight="14:1">
+                                <mat-grid-tile>
+                                    <mat-form-field class="w-80">
+                                        <input id="car-year"
+                                                matInput 
+                                                placeholder="Rok produkcji"
+                                                formControlName="year"
+                                                required>
+                                        <mat-error *ngIf="form.hasError('required', 'year')">
+                                            Rok produkcji jest <strong>wymagany</strong>
+                                        </mat-error>
+                                        <mat-error *ngIf="form.hasError('min', 'year')">
+                                            Rok produkcji przedział ERROR
+                                        </mat-error>
+                                    </mat-form-field>
+                                </mat-grid-tile>
+                                <mat-grid-tile>
+                                    <mat-form-field class="w-80">
+                                        <input id="car-model"
+                                                matInput 
+                                                placeholder="Marka i model"
+                                                formControlName="model"
+                                                required>
+                                        <mat-error *ngIf="form.hasError('required', 'model')">
+                                            Marka i model jest <strong>wymagane</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </mat-grid-tile>
+                                <mat-grid-tile>
+                                    <mat-form-field class="w-80">
+                                        <input id="car-description"
+                                                matInput 
+                                                placeholder="Szczegóły"
+                                                formControlName="description">
+                                    </mat-form-field>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                        </mat-card-content>
+                        <mat-card-actions class="text-center">
+                            <button type="submit" mat-raised-button (click)="backToList()">Powrót</button>
+                            <button type="submit" mat-raised-button color="primary" [disabled]="!form.dirty">Zapisz</button>
+                        </mat-card-actions>
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    
