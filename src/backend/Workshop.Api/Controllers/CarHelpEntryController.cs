@@ -21,8 +21,9 @@ namespace Workshop.Api.Controllers
             _userService = userService;
         }
 
+        [HttpPost]   
         [Authorize(Roles="Manager")]
-        public async Task CreateCarHelpEntry(CreateCarHelpRequestViewModel request)
+        public async Task CreateCarHelpEntry([FromBody]CreateCarHelpRequestViewModel request)
         {
             var currentUser = await _userService.GetUserByName(HttpContext.User.Identity.Name);
             var model = Mapper.Map<CreateCarHelpEntryRequestDto>(request);
@@ -31,8 +32,9 @@ namespace Workshop.Api.Controllers
             await _carHelpService.CreateCarHelpEntry(model);
         }
 
+        [HttpPut]
         [Authorize(Roles = "Manager")]
-        public async Task UpdateCarHelpEntry(UpdateCarHelpRequestViewModel request)
+        public async Task UpdateCarHelpEntry([FromBody]UpdateCarHelpRequestViewModel request)
         {
             var model = Mapper.Map<UpdateCarHelpEntryRequestDto>(request);
 
