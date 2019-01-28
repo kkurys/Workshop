@@ -10,6 +10,7 @@ import { CarHelpEntryService } from 'src/app/services/car-help-entry.service';
 import * as moment from 'moment';
 import { TimeUtil } from 'src/app/utils/time.util';
 import { RolesUtil } from 'src/app/utils/roles.util';
+import { StatusesUtil } from 'src/app/utils/statuses.util';
 
 @Component({
   selector: 'app-car',
@@ -31,7 +32,8 @@ export class CarComponent implements OnInit {
         private carService: CarService,
         private carHelpEntryService: CarHelpEntryService,
         private timeUtil: TimeUtil,
-        private rolesUtil: RolesUtil
+        private rolesUtil: RolesUtil,
+        private statusesUtil: StatusesUtil
     ) {
         
 		this.form = this.formBuilder.group({
@@ -119,6 +121,10 @@ export class CarComponent implements OnInit {
     }
 
     editCarHelpEntry(carHelpId: number) {
-        this.router.navigateByUrl('/car-help-entry/' + carHelpId);
+        this.router.navigate(['/car-help-entry', { id: carHelpId }]);
+    }
+
+    createCarHelpEntry() {
+        this.router.navigate(['/car-help-entry', { carId: this.car.id }]);
     }
 }

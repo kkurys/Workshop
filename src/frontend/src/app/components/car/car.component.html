@@ -64,7 +64,7 @@
                 <mat-expansion-panel *ngFor="let carHelpEntry of carHelpEntires">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            <span>{{ carHelpEntry.name }} <span class="text-faded">({{ timeUtil.formatDate(carHelpEntry.created) }})</span> - <strong>{{ carHelpEntry.status }}</strong></span>
+                            <span>{{ carHelpEntry.name }} <span class="text-faded">({{ timeUtil.formatDate(carHelpEntry.created) }})</span> - <strong>{{ statusesUtil.getStatusName(carHelpEntry.status) }}</strong></span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <p><strong>Opis:</strong> {{ carHelpEntry.description }}</p>
@@ -95,8 +95,8 @@
                 color="primary" 
                 class="appointment-button" 
                 [routerLinkActive]='["active"]' 
-                [routerLinkActiveOptions]='{ exact: true }' 
-                [routerLink]='["/car-help-entry"]'>
+                [routerLinkActiveOptions]='{ exact: true }'
+                (click)=createCarHelpEntry()>
                 Dodaj serwis
             </button>
         </div>
