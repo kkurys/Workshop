@@ -164,8 +164,8 @@ namespace Workshop.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseDefaultFiles();
-
+            app.UseAuthentication();
+            app.UseCors("CorsPolicy");
             //// Enable middleware to serve generated Swagger as a JSON endpoint.
             //app.UseSwagger();
 
