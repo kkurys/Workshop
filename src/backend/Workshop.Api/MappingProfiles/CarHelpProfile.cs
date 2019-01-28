@@ -10,8 +10,14 @@ namespace Workshop.Api.MappingProfiles
         public CarHelpProfile()
         {
             CreateMap<CarHelpEntry, CarHelpEntryDto>()
-                .ForMember(x => x.EmployeeName, y => y.MapFrom(x => $"{x.Employee.FirstName} {x.Employee.LastName}"))
-                .ForMember(x => x.EmployeeId, y => y.MapFrom(x => $"{x.EmployeeId.ToString()}"));
+                .ForMember(x => x.EmployeeName,
+                    y => y.MapFrom(x =>
+                        !string.IsNullOrEmpty(x.Employee.FirstName) &&
+                        !string.IsNullOrEmpty(x.Employee.LastName)
+                            ? $"{x.Employee.FirstName} {x.Employee.LastName}"
+                            : x.Employee.UserName))
+                .ForMember(x => x.EmployeeId, y => y.MapFrom(x => $"{x.EmployeeId.ToString()}"))
+                .ForMember(x => x.CarHelpId, y => y.MapFrom(x => x.Id.ToString()));
 
             CreateMap<CreateCarHelpRequestViewModel, CreateCarHelpEntryRequestDto>().ReverseMap();
             CreateMap<UpdateCarHelpRequestViewModel, UpdateCarHelpEntryRequestDto>().ReverseMap();
