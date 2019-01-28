@@ -5,9 +5,9 @@
                 <mat-icon>home</mat-icon><span class="aligned-with-icon">Przeglądaj</span>
             </a>
         </li>
-        <li class="nav-item"  *ngIf='isManager()'>
+        <li class="nav-item">
             <a class="nav-link" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{ exact: true }' [routerLink]='["/cars"]' (click)='collapse()'>
-                <mat-icon>book</mat-icon><span class="aligned-with-icon">Samochody</span>
+                <mat-icon>book</mat-icon><span class="aligned-with-icon">Twoje samochody</span>
             </a>
         </li>
     </ul>

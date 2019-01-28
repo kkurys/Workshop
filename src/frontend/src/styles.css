@@ -96,6 +96,22 @@ body {
     width: 20%;
 }
 
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
 .message-container {
     text-align: center;
 }
