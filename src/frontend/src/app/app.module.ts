@@ -24,14 +24,18 @@ import { CarService } from './services/car.service';
 import { RolesUtil } from './utils/roles.util';
 import { JwtUtil } from './utils/jwt.util';
 import { CarComponent } from './components/car/car.component';
+import { AuthGuard } from './utils/auth-guard.util';
+import { ManagerGuard } from './utils/manager-guard.util';
+import { ClientGuard } from './utils/client-guard.util';
+import { AdminGuard } from './utils/admin-guard.util';
 
 
 const appRoutes: Routes = [
-	{ path: '', component: HomeComponent, pathMatch: 'full' },
+	{ path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
 	{ path: 'login', component: LoginComponent },
-	{ path: 'cars', component: CarsComponent },
-	{ path: 'car/:id', component: CarComponent },
-	{ path: 'car', component: CarComponent }
+	{ path: 'cars', component: CarsComponent, canActivate: [ManagerGuard] },
+	{ path: 'car/:id', component: CarComponent, canActivate: [ManagerGuard] },
+	{ path: 'car', component: CarComponent, canActivate: [ManagerGuard] }
 
 ];
 
@@ -58,6 +62,10 @@ const appRoutes: Routes = [
 		ReactiveFormsModule
 	],
 	providers: [
+		AuthGuard,
+		AdminGuard,
+		ManagerGuard,
+		ClientGuard,
 		AuthService,
 		CarService,
 		JwtUtil,

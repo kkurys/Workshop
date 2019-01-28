@@ -74,7 +74,7 @@ export class CarComponent implements OnInit {
                     this.form.controls.description.value
                 )
                 .subscribe(response => {
-				    this.router.navigateByUrl('car/' + response.car.id);
+				    this.router.navigateByUrl('cars');
                 });
         } else {
             this.carService
@@ -84,7 +84,7 @@ export class CarComponent implements OnInit {
                     this.form.controls.description.value
                 )
                 .subscribe(response => {
-                    this.router.navigateByUrl('car/' + response.car.id);
+                    this.router.navigateByUrl('cars');
                 });
         }
     }
