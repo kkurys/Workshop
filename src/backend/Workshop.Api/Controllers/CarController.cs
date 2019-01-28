@@ -88,6 +88,12 @@ namespace Workshop.Api.Controllers
             return Json(result);
         }
 
+        /// <summary>
+        /// Endpoint for getting authorized user cars
+        /// </summary>
+        /// <param name="skip"></param>
+        /// <param name="take"></param>
+        /// <returns></returns>
         public async Task<JsonResult> GetUserCars(int skip = 0, int take = 10)
         {
             var currentUser = await _userService.GetUserByName(HttpContext.User.Identity.Name);
@@ -97,6 +103,11 @@ namespace Workshop.Api.Controllers
             return Json(result);
         }
 
+        /// <summary>
+        /// Endpoint for getting car details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<JsonResult> GetCarById(string id)
         {
             var result = await _carService.GetCarById(id);
