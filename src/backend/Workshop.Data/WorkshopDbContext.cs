@@ -33,11 +33,13 @@ namespace Workshop.Data
         {
             builder.Entity<CarHelpEntry>()
                 .HasOne(x => x.Car)
-                .WithMany(x => x.CallHelpEntries);
+                .WithMany(x => x.CallHelpEntries)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<CarHelpEntry>()
                 .HasOne(x => x.Employee)
-                .WithMany(x => x.CallHelpEntries);
+                .WithMany(x => x.CallHelpEntries)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         private void ConfigureCarModel(ModelBuilder builder)

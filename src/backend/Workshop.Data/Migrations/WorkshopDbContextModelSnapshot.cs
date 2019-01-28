@@ -337,12 +337,12 @@ namespace Workshop.Data.Migrations
                     b.HasOne("Workshop.Data.Models.Car.Car", "Car")
                         .WithMany("CallHelpEntries")
                         .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Workshop.Data.Models.Account.WorkshopUser", "Employee")
                         .WithMany("CallHelpEntries")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

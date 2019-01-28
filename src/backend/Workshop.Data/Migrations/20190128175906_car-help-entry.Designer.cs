@@ -10,7 +10,7 @@ using Workshop.Data;
 namespace Workshop.Data.Migrations
 {
     [DbContext(typeof(WorkshopDbContext))]
-    [Migration("20190128175028_car-help-entry")]
+    [Migration("20190128175906_car-help-entry")]
     partial class carhelpentry
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -339,12 +339,12 @@ namespace Workshop.Data.Migrations
                     b.HasOne("Workshop.Data.Models.Car.Car", "Car")
                         .WithMany("CallHelpEntries")
                         .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Workshop.Data.Models.Account.WorkshopUser", "Employee")
                         .WithMany("CallHelpEntries")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }
