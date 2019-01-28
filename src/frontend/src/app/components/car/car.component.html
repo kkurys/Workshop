@@ -76,6 +76,7 @@
 
                     
                     <button 
+                        *ngIf="canManage()"
                         mat-flat-button 
                         color="accent" 
                         class="appointment-button" 
