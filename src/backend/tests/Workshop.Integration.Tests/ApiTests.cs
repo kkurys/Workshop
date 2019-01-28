@@ -8,11 +8,11 @@ using Xunit;
 
 namespace Workshop.Integration.Tests
 {
-    public class AuthApiTests : IClassFixture<WebApplicationFactory<Api.Startup>>
+    public class ApiTests : IClassFixture<WebApplicationFactory<Api.Startup>>
     {
         private readonly WebApplicationFactory<Api.Startup> _factory;
 
-        public AuthApiTests(WebApplicationFactory<Api.Startup> factory)
+        public ApiTests(WebApplicationFactory<Api.Startup> factory)
         {
             _factory = factory;
         }
