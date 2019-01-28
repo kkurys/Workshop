@@ -9,5 +9,6 @@ namespace Workshop.CarHelp.Contracts
         Task UpdateCarHelpEntry(UpdateCarHelpEntryRequestDto request);
         Task<CarHelpEntryListingDto> GetCarHelpEntries(string carId = "", int skip = 0, int take = 10);
         Task<CarHelpEntryDto> GetCarHelpEntryById(string id);
+        Task DeleteCarHelpEntry(DeleteCarHelpRequestDto model);
     }
 }

@@ -10,16 +10,16 @@ using Workshop.Cars.Dto;
 namespace Workshop.Api.Controllers
 {
     /// <summary>
-    /// Car api methods
+    ///     Car api methods
     /// </summary>
     [Authorize]
-    public class CarController: WorkshopBaseController
+    public class CarController : WorkshopBaseController
     {
         private readonly ICarService _carService;
         private readonly IUserService _userService;
 
         /// <summary>
-        /// ctor
+        ///     ctor
         /// </summary>
         /// <param name="carService"></param>
         /// <param name="userService"></param>
@@ -30,12 +30,12 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint for creating cars
+        ///     Endpoint for creating cars
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Roles="Client")]
+        [Authorize(Roles = "Client")]
         public async Task CreateCar([FromBody] CreateCarRequestViewModel request)
         {
             var currentUser = await _userService.GetUserByName(HttpContext.User.Identity.Name);
@@ -48,7 +48,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint for updating car
+        ///     Endpoint for updating car
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -62,7 +62,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint for deleting car
+        ///     Endpoint for deleting car
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -76,7 +76,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint for car listing
+        ///     Endpoint for car listing
         /// </summary>
         /// <param name="skip"></param>
         /// <param name="take"></param>
@@ -89,7 +89,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint for getting authorized user cars
+        ///     Endpoint for getting authorized user cars
         /// </summary>
         /// <param name="skip"></param>
         /// <param name="take"></param>
@@ -104,7 +104,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint for getting car details
+        ///     Endpoint for getting car details
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

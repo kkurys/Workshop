@@ -4,15 +4,16 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
+using Workshop.Api;
 using Xunit;
 
 namespace Workshop.Integration.Tests
 {
-    public class ApiTests : IClassFixture<WebApplicationFactory<Api.Startup>>
+    public class ApiTests : IClassFixture<WebApplicationFactory<Startup>>
     {
-        private readonly WebApplicationFactory<Api.Startup> _factory;
+        private readonly WebApplicationFactory<Startup> _factory;
 
-        public ApiTests(WebApplicationFactory<Api.Startup> factory)
+        public ApiTests(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }

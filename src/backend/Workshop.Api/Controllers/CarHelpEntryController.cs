@@ -1,7 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Workshop.Account.Contracts;
 using Workshop.Api.ViewModels.CarHelpEntry;
 using Workshop.CarHelp.Contracts;
@@ -10,10 +10,10 @@ using Workshop.CarHelp.Dto;
 namespace Workshop.Api.Controllers
 {
     /// <summary>
-    /// Car service endpoint
+    ///     Car service endpoint
     /// </summary>
     [Authorize]
-    public class CarHelpEntryController: WorkshopBaseController
+    public class CarHelpEntryController : WorkshopBaseController
     {
         private readonly ICarHelpEntryService _carHelpEntryService;
         private readonly IUserService _userService;
@@ -25,13 +25,13 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Api for creating car help entries
+        ///     Api for creating car help entries
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost]   
-        [Authorize(Roles="Manager")]
-        public async Task CreateCarHelpEntry([FromBody]CreateCarHelpRequestViewModel request)
+        [HttpPost]
+        [Authorize(Roles = "Manager")]
+        public async Task CreateCarHelpEntry([FromBody] CreateCarHelpRequestViewModel request)
         {
             var currentUser = await _userService.GetUserByName(HttpContext.User.Identity.Name);
             var model = Mapper.Map<CreateCarHelpEntryRequestDto>(request);
@@ -41,13 +41,13 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint for updating car help entries
+        ///     Endpoint for updating car help entries
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPut]
         [Authorize(Roles = "Manager")]
-        public async Task UpdateCarHelpEntry([FromBody]UpdateCarHelpRequestViewModel request)
+        public async Task UpdateCarHelpEntry([FromBody] UpdateCarHelpRequestViewModel request)
         {
             var model = Mapper.Map<UpdateCarHelpEntryRequestDto>(request);
 
@@ -55,7 +55,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint for deleting car help entries
+        ///     Endpoint for deleting car help entries
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -69,7 +69,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint for fetching car help entries. Optionally for car.
+        ///     Endpoint for fetching car help entries. Optionally for car.
         /// </summary>
         /// <param name="carId"></param>
         /// <param name="skip"></param>
@@ -83,7 +83,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint for getting details about a car help entry
+        ///     Endpoint for getting details about a car help entry
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

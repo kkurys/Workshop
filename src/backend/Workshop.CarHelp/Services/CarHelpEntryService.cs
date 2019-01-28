@@ -40,7 +40,7 @@ namespace Workshop.CarHelp.Services
         public async Task<CarHelpEntryListingDto> GetCarHelpEntries(string carId = "", int skip = 0, int take = 10)
         {
             var resultQuery = _dataService.GetSet<CarHelpEntry>()
-                                 .Where(x => string.IsNullOrEmpty(carId) || x.CarId.ToString() == carId);
+                .Where(x => string.IsNullOrEmpty(carId) || x.CarId.ToString() == carId);
 
             var result = new CarHelpEntryListingDto
             {
@@ -61,10 +61,7 @@ namespace Workshop.CarHelp.Services
         {
             var model = await _dataService.GetSet<CarHelpEntry>().FirstOrDefaultAsync(x => x.Id.ToString() == id);
 
-            if (model == null)
-            {
-                throw new InvalidCarHelpEntryIdException();
-            }
+            if (model == null) throw new InvalidCarHelpEntryIdException();
 
             var result = Mapper.Map<CarHelpEntryDto>(model);
 
@@ -76,10 +73,7 @@ namespace Workshop.CarHelp.Services
             var carHelpEntrySet = _dataService.GetSet<CarHelpEntry>();
             var model = await carHelpEntrySet.FirstOrDefaultAsync(x => x.Id.ToString() == request.Id);
 
-            if (model == null)
-            {
-                throw new InvalidCarHelpEntryIdException();
-            }
+            if (model == null) throw new InvalidCarHelpEntryIdException();
 
             carHelpEntrySet.Remove(model);
 
@@ -94,10 +88,7 @@ namespace Workshop.CarHelp.Services
                 .Include(x => x.Employee)
                 .FirstOrDefaultAsync(x => x.Id.ToString() == request.CarHelpId);
 
-            if (carHelpEntry == null)
-            {
-                throw new InvalidCarHelpEntryIdException();
-            }
+            if (carHelpEntry == null) throw new InvalidCarHelpEntryIdException();
 
             carHelpEntry.Description = request.Description;
             carHelpEntry.Price = request.Price;
