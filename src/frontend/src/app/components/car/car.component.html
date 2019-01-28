@@ -8,8 +8,8 @@
             <mat-card class="example-card">
                 <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
                     <mat-card-content>
-                        <mat-grid-list cols="1" rowHeight="14:1">
-                            <mat-grid-tile>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
                                 <mat-form-field class="w-80">
                                     <input id="car-year"
                                             matInput 
@@ -27,8 +27,10 @@
                                         Rok produkcji nie może być większy niż obecny rok
                                     </mat-error>
                                 </mat-form-field>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
                                 <mat-form-field class="w-80">
                                     <input id="car-model"
                                             matInput 
@@ -39,19 +41,22 @@
                                         Marka i model jest <strong>wymagane</strong>
                                     </mat-error>
                                 </mat-form-field>
-                            </mat-grid-tile>
-                            <mat-grid-tile>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
                                 <mat-form-field class="w-80">
                                     <input id="car-description"
                                             matInput 
                                             placeholder="Szczegóły"
                                             formControlName="description">
                                 </mat-form-field>
-                            </mat-grid-tile>
-                        </mat-grid-list>
+                            </div>
+                        </div>
                     </mat-card-content>
                     <mat-card-actions class="text-center">
-                        <button type="submit" mat-raised-button (click)="backToList()">Powrót</button>
+                        <button mat-raised-button color="warn" (click)="delete()">Usuń</button>
+                        <button mat-raised-button (click)="backToList()">Powrót</button>
                         <button type="submit" mat-raised-button color="primary" [disabled]="!form.dirty">Zapisz</button>
                     </mat-card-actions>
                 </form>

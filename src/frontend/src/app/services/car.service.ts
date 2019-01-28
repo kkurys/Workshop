@@ -5,6 +5,7 @@ import { CarsResponse } from '../models/responses/cars-response.model';
 import { CarResponse } from '../models/responses/car-response.model';
 import { UpdateCarRequest } from '../models/requests/update-car-request.model';
 import { CreateCarRequest } from '../models/requests/create-car-request.model';
+import { DeleteCarRequest } from '../models/requests/delete-car-request.model';
 
 @Injectable()
 export class CarService extends BaseService {
@@ -54,5 +55,15 @@ export class CarService extends BaseService {
         let url = this.baseUrl + 'Car/CreateCar';
 
         return this.http.post<CarResponse>(url, createCarModel, { headers: this.headers });
+    }
+
+    deleteCar(id) {
+        let deleteCarModel = new DeleteCarRequest(id);
+        let url = this.baseUrl + 'Car/DeleteCar';
+
+        let params = new HttpParams()
+            .set("id", id);
+
+        return this.http.post(url, deleteCarModel, { headers: this.headers });
     }
 }

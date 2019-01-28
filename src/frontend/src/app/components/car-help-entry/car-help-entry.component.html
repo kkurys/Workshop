@@ -8,8 +8,8 @@
                 <mat-card class="example-card">
                     <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
                         <mat-card-content>
-                            <mat-grid-list cols="1" rowHeight="14:1">
-                                <mat-grid-tile>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
                                     <mat-form-field class="w-80">
                                         <input matInput 
                                                 placeholder="Nazwa"
@@ -19,8 +19,10 @@
                                             Nazwa jest <strong>wymagana</strong>
                                         </mat-error>
                                     </mat-form-field>
-                                </mat-grid-tile>
-                                <mat-grid-tile>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
                                     <mat-form-field class="w-80">
                                         <input matInput 
                                                 placeholder="Opis"
@@ -30,8 +32,10 @@
                                             Opis jest <strong>wymagany</strong>
                                         </mat-error>
                                     </mat-form-field>
-                                </mat-grid-tile>
-                                <mat-grid-tile>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
                                     <mat-form-field class="w-80">
                                         <input matInput 
                                                 type="number"
@@ -39,8 +43,10 @@
                                                 formControlName="price"
                                                 required>
                                     </mat-form-field>
-                                </mat-grid-tile>
-                                <mat-grid-tile>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
                                     <mat-form-field class="w-80">
                                         <mat-select
                                             matNativeControl
@@ -50,8 +56,8 @@
                                             <mat-option *ngFor="let i of [0,1,2,3]" [value]="i">{{ statusesUtil.getStatusName(i) }}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                </mat-grid-tile>
-                            </mat-grid-list>
+                                </div>
+                            </div>
                         </mat-card-content>
                         <mat-card-actions class="text-center">
                             <button mat-raised-button (click)="goBack()">Powrót</button>

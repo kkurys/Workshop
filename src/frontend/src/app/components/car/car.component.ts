@@ -127,4 +127,12 @@ export class CarComponent implements OnInit {
     createCarHelpEntry() {
         this.router.navigate(['/car-help-entry', { carId: this.car.id }]);
     }
+
+    delete() {
+        this.carService
+            .deleteCar(this.car.id)
+            .subscribe(response => {
+                this.router.navigateByUrl('cars');
+            })
+    }
 }
