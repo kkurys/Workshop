@@ -11,7 +11,7 @@ using Workshop.Data.Models.CarHelp;
 
 namespace Workshop.CarHelp.Services
 {
-    public class CarHelpEntryService : ICarHelpService
+    public class CarHelpEntryService : ICarHelpEntryService
     {
         private readonly IDataService _dataService;
 

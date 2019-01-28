@@ -12,12 +12,12 @@ namespace Workshop.Api.Controllers
     [Authorize]
     public class CarHelpEntryController: WorkshopBaseController
     {
-        private readonly ICarHelpService _carHelpService;
+        private readonly ICarHelpEntryService _carHelpEntryService;
         private readonly IUserService _userService;
 
-        public CarHelpEntryController(ICarHelpService carHelpService, IUserService userService)
+        public CarHelpEntryController(ICarHelpEntryService carHelpEntryService, IUserService userService)
         {
-            _carHelpService = carHelpService;
+            _carHelpEntryService = carHelpEntryService;
             _userService = userService;
         }
 
@@ -29,7 +29,7 @@ namespace Workshop.Api.Controllers
             var model = Mapper.Map<CreateCarHelpEntryRequestDto>(request);
             model.Employee = currentUser;
 
-            await _carHelpService.CreateCarHelpEntry(model);
+            await _carHelpEntryService.CreateCarHelpEntry(model);
         }
 
         [HttpPut]
@@ -38,19 +38,19 @@ namespace Workshop.Api.Controllers
         {
             var model = Mapper.Map<UpdateCarHelpEntryRequestDto>(request);
 
-            await _carHelpService.UpdateCarHelpEntry(model);
+            await _carHelpEntryService.UpdateCarHelpEntry(model);
         }
 
         public async Task<JsonResult> GetCarHelpEntries(string carId = "", int skip = 0, int take = 10)
         {
-            var result = await _carHelpService.GetCarHelpEntries(carId, skip, take);
+            var result = await _carHelpEntryService.GetCarHelpEntries(carId, skip, take);
 
             return Json(result);
         }
 
         public async Task<JsonResult> GetCarHelpEntryById(string id)
         {
-            var result = await _carHelpService.GetCarHelpEntryById(id);
+            var result = await _carHelpEntryService.GetCarHelpEntryById(id);
 
             var response = new CarHelpEntryResponseViewModel
             {

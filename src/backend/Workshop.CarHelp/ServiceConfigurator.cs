@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Workshop.CarHelp.Contracts;
 using Workshop.CarHelp.Services;
 
@@ -9,7 +8,7 @@ namespace Workshop.CarHelp
     {
         public static void RegisterCarHelpModule(this IServiceCollection services)
         {
-            services.AddScoped<ICarHelpService, CarHelpEntryService>();
+            services.AddScoped<ICarHelpEntryService, CarHelpEntryService>();
         }
     }
 }

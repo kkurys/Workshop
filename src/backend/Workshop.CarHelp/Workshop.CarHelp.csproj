@@ -9,8 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\backend\Workshop.Common\Workshop.Common.csproj" />
-    <ProjectReference Include="..\backend\Workshop.Data\Workshop.Data.csproj" />
+    <ProjectReference Include="..\Workshop.Data\Workshop.Data.csproj" />
   </ItemGroup>
 
 </Project>
