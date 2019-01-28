@@ -10,6 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Cake" Version="0.32.1" />
+    <PackageReference Include="Cake.DocFx" Version="0.11.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.2105168" />
@@ -17,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Workshop.Account\Workshop.Account.csproj" />
+    <ProjectReference Include="..\Workshop.CarHelp\Workshop.CarHelp.csproj" />
     <ProjectReference Include="..\Workshop.Car\Workshop.Cars.csproj" />
     <ProjectReference Include="..\Workshop.Data\Workshop.Data.csproj" />
     <ProjectReference Include="..\Workshop.Logging\Workshop.Logging.csproj" />

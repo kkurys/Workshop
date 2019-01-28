@@ -1,6 +1,7 @@
 using AutoMapper;
 using Workshop.Account.Dto;
 using Workshop.Api.ViewModels.Account;
+using Workshop.Data.Models.Account;
 
 namespace Workshop.Api.MappingProfiles
 {
@@ -10,6 +11,7 @@ namespace Workshop.Api.MappingProfiles
         {
             CreateMap<RegisterRequestDto, RegisterRequestViewModel>().ReverseMap();
             CreateMap<SignInRequestDto, SignInRequestViewModel>().ReverseMap();
+            CreateMap<WorkshopUser, UserDto>().ReverseMap();
         }
     }
 }

@@ -1,28 +1,53 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
 using Workshop.Data.Models.Account;
 using Workshop.Data.Models.Car;
+using Workshop.Data.Models.CarHelp;
 using Workshop.Data.Models.Logging;
 
 namespace Workshop.Data
 {
-    public class WorkshopDbContext: IdentityDbContext<WorkshopUser, WorkshopRole, Guid>
+    public class WorkshopDbContext : IdentityDbContext<WorkshopUser, WorkshopRole, Guid>
     {
-        public DbSet<WorkshopLog> Logs { get; set; }
-        public DbSet<Car> Cars { get; set; }
-        public DbSet<CarImage> CarImages { get; set; }
-
         public WorkshopDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        public DbSet<WorkshopLog> Logs { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }
+        public DbSet<CarHelpEntry> CarHelpEntries { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
+            ConfigureCarModel(builder);
             ConfigureCarImagesModel(builder);
+            ConfigureCarHelpEntryModel(builder);
 
             InitializeWorkshopRoles(builder);
+        }
+
+        private void ConfigureCarHelpEntryModel(ModelBuilder builder)
+        {
+            builder.Entity<CarHelpEntry>()
+                .HasOne(x => x.Car)
+                .WithMany(x => x.CallHelpEntries)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<CarHelpEntry>()
+                .HasOne(x => x.Employee)
+                .WithMany(x => x.CallHelpEntries)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        private void ConfigureCarModel(ModelBuilder builder)
+        {
+            builder.Entity<Car>()
+                .HasOne(x => x.Owner)
+                .WithMany(x => x.Cars);
         }
 
         private void ConfigureCarImagesModel(ModelBuilder builder)

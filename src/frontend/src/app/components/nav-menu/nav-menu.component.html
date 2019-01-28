@@ -1,0 +1,19 @@
+<div class="sidebar-sticky">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{ exact: true }' [routerLink]='["/"]' (click)='collapse()'>
+                <mat-icon>home</mat-icon><span class="aligned-with-icon">Przeglądaj</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{ exact: true }' [routerLink]='["/cars"]' (click)='collapse()'>
+                <mat-icon>book</mat-icon><span class="aligned-with-icon">Twoje samochody</span>
+            </a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin()">
+            <a class="nav-link" [routerLinkActive]='["active"]' [routerLinkActiveOptions]='{ exact: true }' [routerLink]='["/logs"]' (click)='collapse()'>
+                <mat-icon>book</mat-icon><span class="aligned-with-icon">Dziennik zdarzeń</span>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -7,11 +7,12 @@ using Workshop.Cars.Contracts;
 using Workshop.Cars.Dto;
 using Workshop.Common.Exceptions;
 using Workshop.Data.Contracts;
+using Workshop.Data.Models.Account;
 using Workshop.Data.Models.Car;
 
 namespace Workshop.Cars.Services
 {
-    public class CarService: ICarService
+    public class CarService : ICarService
     {
         private readonly IDataService _dataService;
 
@@ -27,7 +28,8 @@ namespace Workshop.Cars.Services
                 Year = request.Year,
                 Description = request.Description,
                 Model = request.Model,
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow,
+                Owner = request.User
             };
 
             await _dataService.GetSet<Car>().AddAsync(car);
@@ -40,10 +42,7 @@ namespace Workshop.Cars.Services
 
             var car = await carSet.FirstOrDefaultAsync(x => x.Id.ToString() == request.Id);
 
-            if (car == null)
-            {
-                throw new InvalidCarIdException($"Cannot find car for id: {request.Id}");
-            }
+            if (car == null) throw new InvalidCarIdException($"Cannot find car for id: {request.Id}");
 
             car.Description = request.Description;
             car.Model = request.Model;
@@ -60,31 +59,38 @@ namespace Workshop.Cars.Services
 
             var car = await carSet.FirstOrDefaultAsync(x => x.Id.ToString() == request.Id);
 
-            if (car == null)
-            {
-                throw new InvalidCarIdException($"Cannot find car for id: {request.Id}");
-            }
+            if (car == null) throw new InvalidCarIdException($"Cannot find car for id: {request.Id}");
 
             carSet.Remove(car);
 
             await _dataService.SaveDbAsync();
         }
 
-        public async Task<CarListingDto> GetCars(int skip = 0, int take = 10)
+        public async Task<CarListingDto> GetCars(int skip = 0, int take = 10, WorkshopUser user = null)
         {
             var cars =
                 _dataService.GetSet<Car>()
+                    .Where(x => user == null || x.OwnerId == user.Id)
                     .OrderByDescending(x => x.CreatedOn);
 
             var result = new CarListingDto
             {
                 TotalCount = cars.Count(),
-                Cars = await cars.
-                    Skip(skip * take)
+                Cars = await cars
+                    .Skip(skip * take)
                     .Take(take)
                     .Select(x => Mapper.Map<CarDto>(x))
                     .ToListAsync()
             };
+
+            return result;
+        }
+
+        public async Task<CarDto> GetCarById(string id)
+        {
+            var car = await _dataService.GetSet<Car>().FirstOrDefaultAsync(x => x.Id.ToString() == id);
+
+            var result = Mapper.Map<CarDto>(car);
 
             return result;
         }

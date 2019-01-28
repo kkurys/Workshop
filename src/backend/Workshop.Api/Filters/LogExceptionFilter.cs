@@ -6,7 +6,7 @@ using Workshop.Logging.Dto;
 namespace Workshop.Api.Filters
 {
     /// <summary>
-    /// Filter used for logging 
+    ///     Filter used for logging
     /// </summary>
     public class LogExceptionFilter : IActionFilter
     {
@@ -19,14 +19,13 @@ namespace Workshop.Api.Filters
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-
         }
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
             if (context.Exception != null && !context.ExceptionHandled)
             {
-                var log = new WorkshopLogDto()
+                var log = new WorkshopLogDto
                 {
                     Occurence = DateTime.UtcNow,
                     StackTrace = context.Exception.StackTrace,

@@ -15,14 +15,14 @@ export class AuthService extends BaseService {
         super(http);
     }
 
-    login(login, password) {
+    login(login: string, password: string) {
         let loginModel = new LoginRequest(login, password);
         let url = this.baseUrl + 'Auth/Login';
 
         return this.http.post<string>(url, loginModel);
     }
 
-    register(email, login, password, firstName, lastName) {
+    register(email: string, login: string, password: string, firstName: string, lastName: string) {
         let registerModel = new RegisterRequest(email, login, password, firstName, lastName);
         let url = this.baseUrl + 'Auth/Register';
 
@@ -40,6 +40,7 @@ export class AuthService extends BaseService {
                 return true;
             }
         }
+        
         return false;
     }
 }

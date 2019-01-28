@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2" *ngIf="edit">Szczegóły samochodu</h1>
+    <h1 class="h2" *ngIf="!edit">Dodawanie samochodu</h1>
+</div>
+<div class="container admin">
+    <div class="row">
+        <div class="col-md-12">
+            <mat-card class="example-card">
+                <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <mat-form-field class="w-80">
+                                    <input id="car-year"
+                                            matInput 
+                                            type="number"
+                                            placeholder="Rok produkcji"
+                                            formControlName="year"
+                                            required>
+                                    <mat-error *ngIf="form.hasError('required', 'year')">
+                                        Rok produkcji jest <strong>wymagany</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="form.hasError('min', 'year')">
+                                        Rok produkcji nie może być mniejszy niż 1885
+                                    </mat-error>
+                                    <mat-error *ngIf="form.hasError('max', 'year')">
+                                        Rok produkcji nie może być większy niż obecny rok
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <mat-form-field class="w-80">
+                                    <input id="car-model"
+                                            matInput 
+                                            placeholder="Marka i model"
+                                            formControlName="model"
+                                            required>
+                                    <mat-error *ngIf="form.hasError('required', 'model')">
+                                        Marka i model jest <strong>wymagane</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <mat-form-field class="w-80">
+                                    <input id="car-description"
+                                            matInput 
+                                            placeholder="Szczegóły"
+                                            formControlName="description">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions class="text-center">
+                        <button mat-raised-button color="warn" (click)="delete()">Usuń</button>
+                        <button mat-raised-button (click)="backToList()">Powrót</button>
+                        <button type="submit" mat-raised-button color="primary" [disabled]="!form.dirty">Zapisz</button>
+                    </mat-card-actions>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+    <div class="row mt-20" *ngIf="edit">
+        <div class="col-md-12">
+            <mat-accordion class="w-80">
+                <mat-expansion-panel *ngFor="let carHelpEntry of carHelpEntires">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span>{{ carHelpEntry.name }} <span class="text-faded">({{ timeUtil.formatDate(carHelpEntry.created) }})</span> - <strong>{{ statusesUtil.getStatusName(carHelpEntry.status) }}</strong></span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p><strong>Opis:</strong> {{ carHelpEntry.description }}</p>
+                    <p><strong>Zlecone przez:</strong> {{ carHelpEntry.employeeName }}</p>
+
+                    <p><strong>Koszt:</strong> {{ carHelpEntry.price }} zł</p>
+                    <br>
+                    <p class="text-faded">Aktualizacja: {{ timeUtil.formatDate(carHelpEntry.updated) }}</p>
+
+                    
+                    <button 
+                        *ngIf="canManage()"
+                        mat-flat-button 
+                        color="accent" 
+                        class="appointment-button" 
+                        [routerLinkActive]='["active"]' 
+                        [routerLinkActiveOptions]='{ exact: true }' 
+                        (click)=editCarHelpEntry(carHelpEntry.carHelpId)>
+                        Edytuj
+                    </button>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+    <div class="row mt-20" *ngIf="canManage()">
+        <div class="col-md-12">
+            <button 
+                mat-flat-button 
+                color="primary" 
+                class="appointment-button" 
+                [routerLinkActive]='["active"]' 
+                [routerLinkActiveOptions]='{ exact: true }'
+                (click)=createCarHelpEntry()>
+                Dodaj serwis
+            </button>
+        </div>
+    </div>
+</div>
+    

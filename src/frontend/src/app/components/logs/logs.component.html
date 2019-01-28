@@ -1,0 +1,15 @@
+<h2>Dziennik zdarzeń</h2>
+<div class="row mt-20">
+    <div class="col-md-12">
+        <mat-accordion class="w-80">
+            <mat-expansion-panel *ngFor="let log of loggingListing.logs">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span>{{ log.exception }} <span class="text-faded">({{ timeUtil.formatDate(log.occurence) }})</span></span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>{{ log.stackTrace }}</p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

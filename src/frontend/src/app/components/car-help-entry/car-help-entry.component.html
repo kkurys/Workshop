@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2" *ngIf="edit">Szczegóły serwisu</h1>
+        <h1 class="h2" *ngIf="!edit">Dodawanie serwisu</h1>
+    </div>
+    <div class="container admin">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-card class="example-card">
+                    <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+                        <mat-card-content>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <mat-form-field class="w-80">
+                                        <input matInput 
+                                                placeholder="Nazwa"
+                                                formControlName="name"
+                                                required>
+                                        <mat-error *ngIf="form.hasError('required', 'name')">
+                                            Nazwa jest <strong>wymagana</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <mat-form-field class="w-80">
+                                        <input matInput 
+                                                placeholder="Opis"
+                                                formControlName="description"
+                                                required>
+                                        <mat-error *ngIf="form.hasError('required', 'description')">
+                                            Opis jest <strong>wymagany</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <mat-form-field class="w-80">
+                                        <input matInput 
+                                                type="number"
+                                                placeholder="Cena"
+                                                formControlName="price"
+                                                required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <mat-form-field class="w-80">
+                                        <mat-select
+                                            matNativeControl
+                                            placeholder="Status"
+                                            formControlName="status">
+                            
+                                            <mat-option *ngFor="let i of [0,1,2,3]" [value]="i">{{ statusesUtil.getStatusName(i) }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                        <mat-card-actions class="text-center">
+                            <button mat-raised-button (click)="goBack()">Powrót</button>
+                            <button type="submit" mat-raised-button color="primary" [disabled]="!form.dirty">Zapisz</button>
+                        </mat-card-actions>
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+        
+    

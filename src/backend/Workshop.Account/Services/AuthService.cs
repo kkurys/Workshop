@@ -17,12 +17,12 @@ using Workshop.Data.Models.Account;
 
 namespace Workshop.Account.Services
 {
-    public class AuthService: IAuthService
+    public class AuthService : IAuthService
     {
-        private readonly UserManager<WorkshopUser> _userManager;
-        private readonly SignInManager<WorkshopUser> _signInManager;
         private readonly IAuthValidationService _authValidationService;
         private readonly IConfiguration _configuration;
+        private readonly SignInManager<WorkshopUser> _signInManager;
+        private readonly UserManager<WorkshopUser> _userManager;
 
         public AuthService(
             UserManager<WorkshopUser> userManager,
@@ -52,10 +52,8 @@ namespace Workshop.Account.Services
             await _userManager.AddToRoleAsync(newUser, WorkshopRoleNames.Client);
 
             if (!result.Succeeded)
-            {
                 throw new RegisterFailedException(
                     $"An error occured while registering user: {string.Join(",", result.Errors.Select(x => x.Description))}");
-            }
 
             await _signInManager.SignInAsync(newUser, false);
             return await GetToken(newUser);
@@ -68,10 +66,8 @@ namespace Workshop.Account.Services
             var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
 
             if (!result.Succeeded)
-            {
                 throw new SignInFailedException(
                     $"An error occured while signing in user: {model.UserName}");
-            }
 
             var user = await _userManager.FindByNameAsync(model.UserName);
             return await GetToken(user);
@@ -90,12 +86,10 @@ namespace Workshop.Account.Services
 
             var userRoles = await _userManager.GetRolesAsync(user);
 
-            foreach (var role in userRoles)
-            {
-                claims.Add(new Claim("role", role));
-            }
+            foreach (var role in userRoles) claims.Add(new Claim("role", role));
 
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("Tokens:Key")));
+            var signingKey =
+                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("Tokens:Key")));
             var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
 
             var jwt = new JwtSecurityToken(

@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Workshop.Data.Contracts;
 using Workshop.Data.Models.Logging;
 using Workshop.Logging.Contracts;
@@ -29,17 +29,17 @@ namespace Workshop.Logging.Services
 
         public async Task<WorkshopLogListing> GetLogs(int skip = 0, int take = 10)
         {
-            var logs = 
+            var logs =
                 _dataService.GetSet<WorkshopLog>()
-                .OrderByDescending(x => x.Occurence);
+                    .OrderByDescending(x => x.Occurence);
 
             var result = new WorkshopLogListing
             {
                 TotalCount = logs.Count(),
                 Logs = await logs.Skip(skip * take)
-                        .Take(take)
-                        .Select(x => Mapper.Map<WorkshopLogDto>(x))
-                        .ToListAsync()
+                    .Take(take)
+                    .Select(x => Mapper.Map<WorkshopLogDto>(x))
+                    .ToListAsync()
             };
 
             return result;

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.Api", "src\backend\Workshop.Api\Workshop.Api.csproj", "{7D8B3125-75BF-49C4-BB9F-32BBDED6CB7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.Api", "src\backend\Workshop.Api\Workshop.Api.csproj", "{7D8B3125-75BF-49C4-BB9F-32BBDED6CB7D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.Logging", "src\backend\Workshop.Logging\Workshop.Logging.csproj", "{D93FD9F2-5C6D-4EA7-88A7-6C00A946A22E}"
 EndProject
@@ -14,6 +14,27 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.Cars", "src\backend\Workshop.Car\Workshop.Cars.csproj", "{5CAB8FC2-0C4A-46FC-BB57-BC29D2ADCB6F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.Account", "src\backend\Workshop.Account\Workshop.Account.csproj", "{95AE0CFC-23A9-4A1B-8922-1C46909BE1EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.CarHelp", "src\backend\Workshop.CarHelp\Workshop.CarHelp.csproj", "{474D54C9-B4E7-4FCF-AF8D-AEEC88FB01A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{87868026-38E1-47A4-ABA6-DEBBE29407AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EA5BB2B4-E0C5-4E85-8721-7D264E7E1B7B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.CarHelp.Tests", "src\backend\tests\Workshop.CarHelp.Tests\Workshop.CarHelp.Tests.csproj", "{D2657220-2D57-453E-9882-015FBD6B4BC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.Cars.Tests", "src\backend\tests\Workshop.Cars.Tests\Workshop.Cars.Tests.csproj", "{3F81547B-000D-4772-9BB2-D503A7F57E3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.TestUtils", "src\backend\tests\Workshop.TestUtils\Workshop.TestUtils.csproj", "{78C1A0A3-5828-4C14-8861-946671C37D93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.Integration.Tests", "src\backend\tests\Workshop.Integration.Tests\Workshop.Integration.Tests.csproj", "{0069C5B5-A2DB-4F89-8C8C-89215DB6A587}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EDEED17A-2E6B-4F9A-996A-3BDFE0E1E24E}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		docfx_project\docfx.json = docfx_project\docfx.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +66,42 @@ Global
 		{95AE0CFC-23A9-4A1B-8922-1C46909BE1EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95AE0CFC-23A9-4A1B-8922-1C46909BE1EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95AE0CFC-23A9-4A1B-8922-1C46909BE1EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{474D54C9-B4E7-4FCF-AF8D-AEEC88FB01A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{474D54C9-B4E7-4FCF-AF8D-AEEC88FB01A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{474D54C9-B4E7-4FCF-AF8D-AEEC88FB01A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{474D54C9-B4E7-4FCF-AF8D-AEEC88FB01A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2657220-2D57-453E-9882-015FBD6B4BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2657220-2D57-453E-9882-015FBD6B4BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2657220-2D57-453E-9882-015FBD6B4BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2657220-2D57-453E-9882-015FBD6B4BC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F81547B-000D-4772-9BB2-D503A7F57E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F81547B-000D-4772-9BB2-D503A7F57E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F81547B-000D-4772-9BB2-D503A7F57E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F81547B-000D-4772-9BB2-D503A7F57E3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78C1A0A3-5828-4C14-8861-946671C37D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78C1A0A3-5828-4C14-8861-946671C37D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78C1A0A3-5828-4C14-8861-946671C37D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78C1A0A3-5828-4C14-8861-946671C37D93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0069C5B5-A2DB-4F89-8C8C-89215DB6A587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0069C5B5-A2DB-4F89-8C8C-89215DB6A587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0069C5B5-A2DB-4F89-8C8C-89215DB6A587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0069C5B5-A2DB-4F89-8C8C-89215DB6A587}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7D8B3125-75BF-49C4-BB9F-32BBDED6CB7D} = {EA5BB2B4-E0C5-4E85-8721-7D264E7E1B7B}
+		{D93FD9F2-5C6D-4EA7-88A7-6C00A946A22E} = {EA5BB2B4-E0C5-4E85-8721-7D264E7E1B7B}
+		{B396CF2C-7BC6-4F4E-B892-E1E568C20481} = {EA5BB2B4-E0C5-4E85-8721-7D264E7E1B7B}
+		{F142F0EE-39A3-40DF-949E-45AE80BCE2C5} = {EA5BB2B4-E0C5-4E85-8721-7D264E7E1B7B}
+		{5CAB8FC2-0C4A-46FC-BB57-BC29D2ADCB6F} = {EA5BB2B4-E0C5-4E85-8721-7D264E7E1B7B}
+		{95AE0CFC-23A9-4A1B-8922-1C46909BE1EC} = {EA5BB2B4-E0C5-4E85-8721-7D264E7E1B7B}
+		{474D54C9-B4E7-4FCF-AF8D-AEEC88FB01A8} = {EA5BB2B4-E0C5-4E85-8721-7D264E7E1B7B}
+		{D2657220-2D57-453E-9882-015FBD6B4BC7} = {87868026-38E1-47A4-ABA6-DEBBE29407AD}
+		{3F81547B-000D-4772-9BB2-D503A7F57E3D} = {87868026-38E1-47A4-ABA6-DEBBE29407AD}
+		{78C1A0A3-5828-4C14-8861-946671C37D93} = {87868026-38E1-47A4-ABA6-DEBBE29407AD}
+		{0069C5B5-A2DB-4F89-8C8C-89215DB6A587} = {87868026-38E1-47A4-ABA6-DEBBE29407AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {991A564E-4948-4D71-9AD4-483A477D1B0F}
