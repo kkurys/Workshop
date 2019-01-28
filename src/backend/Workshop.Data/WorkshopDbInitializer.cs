@@ -14,7 +14,7 @@ namespace Workshop.Data
                 Email = "admin@admin.pl",
                 NormalizedEmail = "ADMIN@ADMIN.pl",
                 FirstName = "Admin",
-                LastName = "Adminowski",
+                LastName = "Adminowski"
             };
 
             var clientUser = new WorkshopUser
@@ -24,7 +24,7 @@ namespace Workshop.Data
                 Email = "client@client.pl",
                 NormalizedEmail = "CLIENT@CLIENT.pl",
                 FirstName = "Klient",
-                LastName = "Interesancki",
+                LastName = "Interesancki"
             };
 
             var managerUser = new WorkshopUser
@@ -34,7 +34,7 @@ namespace Workshop.Data
                 Email = "manager@manager.pl",
                 NormalizedEmail = "MANAGER@MANAGER.pl",
                 FirstName = "Manager",
-                LastName = "Zarzadzajacy",
+                LastName = "Zarzadzajacy"
             };
 
             AddIfNotExists(adminUser, userManager);
@@ -46,12 +46,9 @@ namespace Workshop.Data
         {
             if (userManager.FindByNameAsync(user.UserName).Result == null)
             {
-                IdentityResult result = userManager.CreateAsync(user, "Haslo123.").Result;
+                var result = userManager.CreateAsync(user, "Haslo123.").Result;
 
-                if (result.Succeeded)
-                {
-                    userManager.AddToRoleAsync(user, user.UserName.ToUpper()).Wait();
-                }
+                if (result.Succeeded) userManager.AddToRoleAsync(user, user.UserName.ToUpper()).Wait();
             }
         }
     }

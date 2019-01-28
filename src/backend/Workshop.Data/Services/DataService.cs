@@ -4,7 +4,7 @@ using Workshop.Data.Contracts;
 
 namespace Workshop.Data.Services
 {
-    public class DataService: IDataService
+    public class DataService : IDataService
     {
         private readonly WorkshopDbContext _dbContext;
 

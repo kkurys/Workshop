@@ -4,6 +4,9 @@ using Workshop.Logging.Contracts;
 
 namespace Workshop.Api.Controllers
 {
+    /// <summary>
+    /// Logging endpoint
+    /// </summary>
     public class LoggingController: WorkshopBaseController
     {
         private readonly ILoggingService _loggingService;
@@ -14,7 +17,7 @@ namespace Workshop.Api.Controllers
         }
 
         /// <summary>
-        /// Returns "take" most recent logs while skipping skip * take entries.
+        /// Endpoint for fetching logs
         /// </summary>
         /// <param name="skip"></param>
         /// <param name="take"></param>

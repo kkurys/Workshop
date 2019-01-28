@@ -8,8 +8,8 @@ namespace Workshop.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CarHelpEntries",
-                columns: table => new
+                "CarHelpEntries",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
@@ -25,34 +25,34 @@ namespace Workshop.Data.Migrations
                 {
                     table.PrimaryKey("PK_CarHelpEntries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CarHelpEntries_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "Id",
+                        "FK_CarHelpEntries_Cars_CarId",
+                        x => x.CarId,
+                        "Cars",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_CarHelpEntries_AspNetUsers_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        "FK_CarHelpEntries_AspNetUsers_EmployeeId",
+                        x => x.EmployeeId,
+                        "AspNetUsers",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarHelpEntries_CarId",
-                table: "CarHelpEntries",
-                column: "CarId");
+                "IX_CarHelpEntries_CarId",
+                "CarHelpEntries",
+                "CarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarHelpEntries_EmployeeId",
-                table: "CarHelpEntries",
-                column: "EmployeeId");
+                "IX_CarHelpEntries_EmployeeId",
+                "CarHelpEntries",
+                "EmployeeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CarHelpEntries");
+                "CarHelpEntries");
         }
     }
 }

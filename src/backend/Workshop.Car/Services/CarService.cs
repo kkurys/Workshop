@@ -12,7 +12,7 @@ using Workshop.Data.Models.Car;
 
 namespace Workshop.Cars.Services
 {
-    public class CarService: ICarService
+    public class CarService : ICarService
     {
         private readonly IDataService _dataService;
 
@@ -42,10 +42,7 @@ namespace Workshop.Cars.Services
 
             var car = await carSet.FirstOrDefaultAsync(x => x.Id.ToString() == request.Id);
 
-            if (car == null)
-            {
-                throw new InvalidCarIdException($"Cannot find car for id: {request.Id}");
-            }
+            if (car == null) throw new InvalidCarIdException($"Cannot find car for id: {request.Id}");
 
             car.Description = request.Description;
             car.Model = request.Model;
@@ -62,10 +59,7 @@ namespace Workshop.Cars.Services
 
             var car = await carSet.FirstOrDefaultAsync(x => x.Id.ToString() == request.Id);
 
-            if (car == null)
-            {
-                throw new InvalidCarIdException($"Cannot find car for id: {request.Id}");
-            }
+            if (car == null) throw new InvalidCarIdException($"Cannot find car for id: {request.Id}");
 
             carSet.Remove(car);
 

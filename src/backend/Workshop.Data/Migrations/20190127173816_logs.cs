@@ -8,24 +8,21 @@ namespace Workshop.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Logs",
-                columns: table => new
+                "Logs",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Occurence = table.Column<DateTime>(nullable: false),
                     Exception = table.Column<string>(nullable: true),
                     StackTrace = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Logs", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Logs", x => x.Id); });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Logs");
+                "Logs");
         }
     }
 }

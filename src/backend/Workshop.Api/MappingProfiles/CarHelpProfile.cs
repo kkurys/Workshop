@@ -5,7 +5,7 @@ using Workshop.Data.Models.CarHelp;
 
 namespace Workshop.Api.MappingProfiles
 {
-    public class CarHelpProfile: Profile
+    public class CarHelpProfile : Profile
     {
         public CarHelpProfile()
         {
@@ -21,6 +21,7 @@ namespace Workshop.Api.MappingProfiles
 
             CreateMap<CreateCarHelpRequestViewModel, CreateCarHelpEntryRequestDto>().ReverseMap();
             CreateMap<UpdateCarHelpRequestViewModel, UpdateCarHelpEntryRequestDto>().ReverseMap();
+            CreateMap<DeleteCarHelpRequestViewModel, DeleteCarHelpRequestDto>().ReverseMap();
         }
     }
 }
