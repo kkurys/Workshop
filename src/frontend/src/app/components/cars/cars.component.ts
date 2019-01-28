@@ -10,7 +10,7 @@ import { RolesUtil } from 'src/app/utils/roles.util';
   styleUrls: ['./cars.component.css']
 })
 export class CarsComponent implements OnInit {
-    cars: Car[];
+    cars: Car[] = [];
 
     constructor(
         private carService: CarService, 

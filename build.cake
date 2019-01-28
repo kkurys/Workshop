@@ -115,7 +115,7 @@ Task("DupFinder")
         ShowText = true,
         OutputFile = $"{artifactsDir}/dupfinder.xml",
         ExcludeCodeRegionsByNameSubstring = new string [] { "DupFinder Exclusion" },
-        ThrowExceptionOnFindingDuplicates = true
+        ThrowExceptionOnFindingDuplicates = false
     };
     DupFinder("./Workshop.sln", settings);
 });
@@ -127,7 +127,7 @@ Task("InspectCode")
     var settings = new InspectCodeSettings() {
         SolutionWideAnalysis = true,
         OutputFile = $"{artifactsDir}/inspectcode.xml",
-        ThrowExceptionOnFindingViolations = true
+        ThrowExceptionOnFindingViolations = false
     };
     InspectCode("./Workshop.sln", settings);
 });
@@ -138,14 +138,27 @@ Task("Validate")
     .IsDependentOn("InspectCode");
 
 ///////////////////////////////////////////////////////////////////////////////
-// CI
+// EXECUTION
 ///////////////////////////////////////////////////////////////////////////////
 
-Task("CI")
+Task("Doc")
+	.Does(() => 
+	{
+		DocFxMetadata("./docfx_project/docfx.json");
+		DocFxBuild("./docfx_project/docfx.json");
+		DocFxServe("./docfx_project/_site");
+	});
+
+///////////////////////////////////////////////////////////////////////////////
+// Full run
+///////////////////////////////////////////////////////////////////////////////
+
+Task("full")
     .Description("Build the code, test and validate")
     .IsDependentOn("Build")
     .IsDependentOn("Test")
-    .IsDependentOn("Validate");
+    .IsDependentOn("Validate")
+	.IsDependentOn("Doc");
 
 ///////////////////////////////////////////////////////////////////////////////
 // TARGETS
@@ -156,16 +169,9 @@ Task("Default")
     .IsDependentOn("Test")
     .IsDependentOn("Validate");
 
+
 ///////////////////////////////////////////////////////////////////////////////
 // EXECUTION
 ///////////////////////////////////////////////////////////////////////////////
-
-Task("doc")
-	.Does(() => 
-	{
-		DocFxMetadata("./docfx_project/docfx.json");
-		DocFxBuild("./docfx_project/docfx.json");
-		DocFxServe("./docfx_project/_site");
-	});
 
 RunTarget(target);
