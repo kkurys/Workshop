@@ -9,6 +9,7 @@ import { CarHelpEntryService } from 'src/app/services/car-help-entry.service';
 
 import * as moment from 'moment';
 import { TimeUtil } from 'src/app/utils/time.util';
+import { RolesUtil } from 'src/app/utils/roles.util';
 
 @Component({
   selector: 'app-car',
@@ -29,7 +30,8 @@ export class CarComponent implements OnInit {
         private formBuilder: FormBuilder,
         private carService: CarService,
         private carHelpEntryService: CarHelpEntryService,
-        private timeUtil: TimeUtil
+        private timeUtil: TimeUtil,
+        private rolesUtil: RolesUtil
     ) {
         
 		this.form = this.formBuilder.group({
@@ -110,5 +112,13 @@ export class CarComponent implements OnInit {
                     this.router.navigateByUrl('cars');
                 });
         }
+    }
+
+    canManage() {
+        return this.rolesUtil.isInRole("Manager");
+    }
+
+    editCarHelpEntry(carHelpId: number) {
+        this.router.navigateByUrl('/car-help-entry/' + carHelpId);
     }
 }

@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { CarsComponent } from './components/cars/cars.component';
+import { CarHelpEntryComponent } from './components/car-help-entry/car-help-entry.component';
 
 import { MessageSnackBarComponent } from './components/message-snack-bar/message-snack-bar.component';
 
@@ -37,7 +38,9 @@ const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent },
 	{ path: 'cars', component: CarsComponent, canActivate: [AuthGuard] },
 	{ path: 'car/:id', component: CarComponent, canActivate: [AuthGuard] },
-	{ path: 'car', component: CarComponent, canActivate: [AuthGuard] }
+	{ path: 'car', component: CarComponent, canActivate: [AuthGuard] },
+	{ path: 'car-help-entry/:id', component: CarHelpEntryComponent, canActivate: [ManagerGuard] },
+	{ path: 'car-help-entry', component: CarHelpEntryComponent, canActivate: [ManagerGuard] }
 
 ];
 
@@ -49,7 +52,8 @@ const appRoutes: Routes = [
 		HomeComponent,
 		MessageSnackBarComponent,
 		CarsComponent,
-		CarComponent
+		CarComponent,
+		CarHelpEntryComponent
 	],
 	imports: [
 		BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
