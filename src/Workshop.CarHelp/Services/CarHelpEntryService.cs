@@ -49,6 +49,7 @@ namespace Workshop.CarHelp.Services
                     .OrderByDescending(x => x.Updated ?? x.Created)
                     .Skip(skip * take)
                     .Take(take)
+                    .Include(x => x.Employee)
                     .Select(x => Mapper.Map<CarHelpEntryDto>(x))
                     .ToListAsync()
             };
@@ -74,7 +75,9 @@ namespace Workshop.CarHelp.Services
         {
             var carHelpEntrySet = _dataService.GetSet<CarHelpEntry>();
 
-            var carHelpEntry = await carHelpEntrySet.FirstOrDefaultAsync(x => x.Id.ToString() == request.CarHelpId);
+            var carHelpEntry = await carHelpEntrySet
+                .Include(x => x.Employee)
+                .FirstOrDefaultAsync(x => x.Id.ToString() == request.CarHelpId);
 
             if (carHelpEntry == null)
             {
