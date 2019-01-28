@@ -33,9 +33,9 @@ import { AdminGuard } from './utils/admin-guard.util';
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
 	{ path: 'login', component: LoginComponent },
-	{ path: 'cars', component: CarsComponent, canActivate: [ManagerGuard] },
-	{ path: 'car/:id', component: CarComponent, canActivate: [ManagerGuard] },
-	{ path: 'car', component: CarComponent, canActivate: [ManagerGuard] }
+	{ path: 'cars', component: CarsComponent, canActivate: [AuthGuard] },
+	{ path: 'car/:id', component: CarComponent, canActivate: [AuthGuard] },
+	{ path: 'car', component: CarComponent, canActivate: [AuthGuard] }
 
 ];
 

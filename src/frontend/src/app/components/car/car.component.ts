@@ -4,7 +4,7 @@ import { getLocalRefs } from '@angular/core/src/render3/discovery_utils';
 import { Car } from 'src/app/models/car.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Service } from 'src/app/models/service.model';
+import { CarHelpEntry } from 'src/app/models/car-help-entry.model';
 
 @Component({
   selector: 'app-car',
@@ -17,7 +17,7 @@ export class CarComponent implements OnInit {
     edit: Boolean;
     form: FormGroup;
     car: Car;
-    services: Service[];
+    services: CarHelpEntry[];
 
     constructor(
         private route: ActivatedRoute,
@@ -29,11 +29,15 @@ export class CarComponent implements OnInit {
 		this.form = this.formBuilder.group({
 			year: [
 				new Date().getFullYear(),
-				[Validators.required, Validators.min(1885), Validators.max(new Date().getFullYear())]
+				[
+                    Validators.required, 
+                    Validators.min(1885), 
+                    Validators.max(new Date().getFullYear())
+                ]
 			],
 			model: [
 				'',
-				[Validators.required]
+				[ Validators.required ]
 			],
 			description: [
 				'',
